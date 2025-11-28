@@ -130,6 +130,41 @@
             -webkit-text-fill-color: transparent;
         }
 
+        /* Contact buttons */
+        .contact-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+        }
+        .contact-btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 999px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1.5px solid var(--accent);
+            transition: all 0.25s ease, box-shadow 0.35s ease;
+        }
+        .contact-btn.primary {
+            background: var(--accent);
+            color: #ffffff;
+            box-shadow: 0 10px 25px rgba(255,20,147,0.35);
+        }
+        .contact-btn.secondary {
+            background: transparent;
+            color: var(--accent);
+        }
+        .contact-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+            background: var(--accent-hover);
+            color: var(--bg);
+        }
+        [data-theme="purple"] .contact-btn.primary {
+            box-shadow: 0 10px 25px rgba(147,51,234,0.35);
+        }
+
         footer {
             padding: 60px 0;
             text-align: center;
@@ -140,6 +175,12 @@
         @media (max-width: 768px) {
             h1 { font-size: 48px; }
             .grid, .stats { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .contact-btn {
+                width: 100%;
+                text-align: center;
+            }
         }
 
         .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
@@ -215,17 +256,21 @@
             </div>
         </section>
 
-        <section id="contact" class="fade-in" style="padding:80px 0;">
+        <section id="contact" class="fade-in" style="padding:80px 0; text-align:center;">
             <h2 style="font-size:32px; margin-bottom:16px;">Let’s work together</h2>
-            <p class="subtitle">
-                Available for freelance video ad editing, UGC cuts and social media reels.<br>
-                Email:
-                <a href="mailto:cele0stialdraco6@gmail.com">cele0stialdraco6@gmail.com</a><br>
-                LinkedIn:
-                <a href="https://www.linkedin.com/in/pragati-pandey-0b9a301a8/" target="_blank">
-                    Pragati Pandey
-                </a>
+            <p class="subtitle" style="margin-bottom:32px;">
+                Available for freelance video ad editing, UGC cuts and social media reels.
             </p>
+
+            <div class="contact-buttons">
+                <a href="mailto:cele0stialdraco6@gmail.com" class="contact-btn primary">
+                    Contact me by email
+                </a>
+                <a href="https://www.linkedin.com/in/pragati-pandey-0b9a301a8/" target="_blank"
+                   class="contact-btn secondary">
+                    Connect on LinkedIn
+                </a>
+            </div>
         </section>
     </main>
 
