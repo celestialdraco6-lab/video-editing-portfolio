@@ -12,23 +12,21 @@
             transition: all 0.4s ease;
         }
 
-        /* Pink & Black Theme (default) */
         :root {
             --bg: #0e0e0e;
             --text: #ffffff;
             --text-light: #b3b3b3;
-            --accent: #ff1493;        /* Hot neon pink */
+            --accent: #ff1493;
             --accent-hover: #ff4da6;
             --border: #333333;
             --card-bg: #1a1a1a;
         }
 
-        /* Purple & White Theme */
         [data-theme="purple"] {
             --bg: #fafafa;
             --text: #1a1a2e;
             --text-light: #666680;
-            --accent: #9333ea;        /* Rich purple */
+            --accent: #9333ea;
             --accent-hover: #a855f7;
             --border: #e2e8f0;
             --card-bg: #ffffff;
@@ -59,7 +57,6 @@
             color: var(--bg);
         }
 
-        /* Hero */
         .hero { padding: 140px 0 100px; text-align: center; }
         h1 {
             font-size: 68px; font-weight: 800; letter-spacing: -2.5px;
@@ -69,7 +66,12 @@
             background-clip: text;
             margin-bottom: 24px;
         }
-        .subtitle { font-size: 21px; color: var(--text-light); max-width: 680px; margin: 0 auto 48px; }
+        .subtitle {
+            font-size: 21px;
+            color: var(--text-light);
+            max-width: 680px;
+            margin: 0 auto 48px;
+        }
         .cta-button {
             display: inline-block;
             padding: 18px 40px;
@@ -87,8 +89,11 @@
             background: var(--accent-hover);
         }
 
-        /* Cards & Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+        }
         .card {
             padding: 40px;
             background: var(--card-bg);
@@ -101,47 +106,39 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.2);
             border-color: var(--accent);
         }
-        [data-theme="purple"] .card:hover { box-shadow: 0 20px 50px rgba(147,51,234,0.15); }
+        [data-theme="purple"] .card:hover {
+            box-shadow: 0 20px 50px rgba(147,51,234,0.15);
+        }
 
         .card h3 { font-size: 22px; margin: 16px 0; }
         .card p { color: var(--text-light); }
 
-        /* CTA Section */
-        .cta-section {
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 40px;
             text-align: center;
-            padding: 100px 40px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-            border-radius: 28px;
-            margin: 100px 0;
-            color: white;
-        }
-        .cta-section h2 { font-size: 52px; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 16px; }
-        .cta-section p { font-size: 19px; max-width: 600px; margin: 0 auto 40px; opacity: 0.95; }
-
-        /* Stats */
-        .stats { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
-            gap: 40px; 
-            text-align: center; 
             padding: 80px 0;
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
         }
-        .stat-number { 
-            font-size: 56px; 
-            font-weight: 800; 
+        .stat-number {
+            font-size: 56px;
+            font-weight: 800;
             background: linear-gradient(135deg, var(--accent), var(--accent-hover));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        footer { padding: 60px 0; text-align: center; color: var(--text-light); font-size: 15px; }
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 15px;
+        }
 
-        /* Responsive */
         @media (max-width: 768px) {
             h1 { font-size: 48px; }
-            .cta-section h2 { font-size: 40px; }
             .grid, .stats { grid-template-columns: 1fr; }
         }
 
@@ -150,8 +147,6 @@
     </style>
 </head>
 <body>
-
-    <!-- Keep your existing HTML body exactly the same, just update the button text if you want -->
     <header>
         <nav class="container">
             <div class="logo">MotionCraft</div>
@@ -159,8 +154,88 @@
         </nav>
     </header>
 
-    <!-- Rest of your HTML stays 100% the same -->
-    <!-- ... hero, stats, sections, etc. ... -->
+    <main class="container">
+        <section class="hero fade-in" id="top">
+            <h1>Short-Form Video Ads & Reels</h1>
+            <p class="subtitle">
+                I edit high-attention social media videos with strong hooks, dynamic cuts,
+                captions and music — ideal for Meta, Instagram Reels and YouTube Shorts.
+            </p>
+            <a href="#work" class="cta-button">View Sample Ad Edits</a>
+        </section>
+
+        <section class="stats fade-in">
+            <div>
+                <div class="stat-number">15–30s</div>
+                <p>Optimised ad length for Meta &amp; Reels.</p>
+            </div>
+            <div>
+                <div class="stat-number">3+</div>
+                <p>Sample ad variations per concept.</p>
+            </div>
+            <div>
+                <div class="stat-number">24h</div>
+                <p>Typical turnaround for short edits.</p>
+            </div>
+        </section>
+
+        <section id="work" class="fade-in" style="padding:80px 0;">
+            <h2 style="font-size:32px; margin-bottom:20px;">Sample Ad Edits</h2>
+            <p class="subtitle" style="margin-bottom:32px;">
+                Practice projects demonstrating hooks, captions, transitions and music selection.
+            </p>
+
+            <div class="grid">
+                <article class="card">
+                    <h3>Product Promo Ad</h3>
+                    <p>15s vertical ad with fast cuts, bold headline hook and animated captions.</p>
+                    <a href="LINK_1" target="_blank" class="cta-button"
+                       style="padding:10px 20px; font-size:14px;">
+                        Watch sample
+                    </a>
+                </article>
+
+                <article class="card">
+                    <h3>Offer / Discount Reel</h3>
+                    <p>High-energy sale reel with beat-matched cuts and price highlight graphics.</p>
+                    <a href="LINK_2" target="_blank" class="cta-button"
+                       style="padding:10px 20px; font-size:14px;">
+                        Watch sample
+                    </a>
+                </article>
+
+                <article class="card">
+                    <h3>App / Service Explainer</h3>
+                    <p>Short explainer showing problem → solution with clear CTA at the end.</p>
+                    <a href="LINK_3" target="_blank" class="cta-button"
+                       style="padding:10px 20px; font-size:14px;">
+                        Watch sample
+                    </a>
+                </article>
+            </div>
+        </section>
+
+        <section id="contact" class="fade-in" style="padding:80px 0;">
+            <h2 style="font-size:32px; margin-bottom:16px;">Let’s work together</h2>
+            <p class="subtitle">
+                Available for freelance video ad editing, UGC cuts and social media reels.<br>
+                Email:
+                <a href="mailto:cele0stialdraco6@gmail.com">cele0stialdraco6@gmail.com</a><br>
+                LinkedIn:
+                <a href="https://www.linkedin.com/in/pragati-pandey-0b9a301a8/" target="_blank">
+                    Pragati Pandey
+                </a>
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        MotionCraft · Portfolio by Pragati Pandey ·
+        <a href="mailto:cele0stialdraco6@gmail.com">cele0stialdraco6@gmail.com</a> ·
+        <a href="https://www.linkedin.com/in/pragati-pandey-0b9a301a8/" target="_blank">
+            LinkedIn
+        </a>
+    </footer>
 
     <script>
         function toggleTheme() {
@@ -169,20 +244,23 @@
             document.documentElement.setAttribute('data-theme', next);
             localStorage.setItem('motioncraft-theme', next);
         }
-        // Load saved theme
+
         const saved = localStorage.getItem('motioncraft-theme') || 'pink';
         document.documentElement.setAttribute('data-theme', saved);
 
-        // Smooth scroll & fade-in animation (same as before)
         document.querySelectorAll('a[href^="#"]').forEach(a => {
             a.addEventListener('click', e => {
                 e.preventDefault();
                 document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             });
         });
+
         const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('visible'));
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
         }, { threshold: 0.1 });
+
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     </script>
 </body>
