@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="pink">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotionCraft — Motion Graphics & Video Editing</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+            line-height: 1.6;
+            transition: all 0.4s ease;
+        }
+
+        /* Pink & Black Theme (default) */
+        :root {
+            --bg: #0e0e0e;
+            --text: #ffffff;
+            --text-light: #b3b3b3;
+            --accent: #ff1493;        /* Hot neon pink */
+            --accent-hover: #ff4da6;
+            --border: #333333;
+            --card-bg: #1a1a1a;
+        }
+
+        /* Purple & White Theme */
+        [data-theme="purple"] {
+            --bg: #fafafa;
+            --text: #1a1a2e;
+            --text-light: #666680;
+            --accent: #9333ea;        /* Rich purple */
+            --accent-hover: #a855f7;
+            --border: #e2e8f0;
+            --card-bg: #ffffff;
+        }
+
+        body { background: var(--bg); color: var(--text); }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        header {
+            position: sticky; top: 0; padding: 24px 0;
+            background: var(--bg); border-bottom: 1px solid var(--border);
+            z-index: 100; backdrop-filter: blur(12px);
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+        .theme-toggle {
+            background: transparent;
+            border: 1.5px solid var(--accent);
+            color: var(--accent);
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .theme-toggle:hover {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        /* Hero */
+        .hero { padding: 140px 0 100px; text-align: center; }
+        h1 {
+            font-size: 68px; font-weight: 800; letter-spacing: -2.5px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 24px;
+        }
+        .subtitle { font-size: 21px; color: var(--text-light); max-width: 680px; margin: 0 auto 48px; }
+        .cta-button {
+            display: inline-block;
+            padding: 18px 40px;
+            background: var(--accent);
+            color: white;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(255,20,147,0.3);
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(255,20,147,0.4);
+            background: var(--accent-hover);
+        }
+
+        /* Cards & Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
+        .card {
+            padding: 40px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            transition: all 0.4s ease;
+        }
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            border-color: var(--accent);
+        }
+        [data-theme="purple"] .card:hover { box-shadow: 0 20px 50px rgba(147,51,234,0.15); }
+
+        .card h3 { font-size: 22px; margin: 16px 0; }
+        .card p { color: var(--text-light); }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 100px 40px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            border-radius: 28px;
+            margin: 100px 0;
+            color: white;
+        }
+        .cta-section h2 { font-size: 52px; font-weight: 800; letter-spacing: -1.5px; margin-bottom: 16px; }
+        .cta-section p { font-size: 19px; max-width: 600px; margin: 0 auto 40px; opacity: 0.95; }
+
+        /* Stats */
+        .stats { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
+            gap: 40px; 
+            text-align: center; 
+            padding: 80px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .stat-number { 
+            font-size: 56px; 
+            font-weight: 800; 
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        footer { padding: 60px 0; text-align: center; color: var(--text-light); font-size: 15px; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 48px; }
+            .cta-section h2 { font-size: 40px; }
+            .grid, .stats { grid-template-columns: 1fr; }
+        }
+
+        .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <!-- Keep your existing HTML body exactly the same, just update the button text if you want -->
+    <header>
+        <nav class="container">
+            <div class="logo">MotionCraft</div>
+            <button class="theme-toggle" onclick="toggleTheme()">Switch Theme</button>
+        </nav>
+    </header>
+
+    <!-- Rest of your HTML stays 100% the same -->
+    <!-- ... hero, stats, sections, etc. ... -->
+
+    <script>
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'purple' ? 'pink' : 'purple';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('motioncraft-theme', next);
+        }
+        // Load saved theme
+        const saved = localStorage.getItem('motioncraft-theme') || 'pink';
+        document.documentElement.setAttribute('data-theme', saved);
+
+        // Smooth scroll & fade-in animation (same as before)
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('visible'));
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
