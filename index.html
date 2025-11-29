@@ -1,312 +1,635 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="pink">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MotionCraft — Motion Graphics & Video Editing</title>
+    <title>Luna Essence — Video Editing Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
-            line-height: 1.6;
-            transition: all 0.4s ease;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         :root {
-            --bg: #0e0e0e;
-            --text: #ffffff;
-            --text-light: #b3b3b3;
-            --accent: #ff1493;
-            --accent-hover: #ff4da6;
-            --border: #333333;
-            --card-bg: #1a1a1a;
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --bg-light: #fafafa;
+            --bg-dark: #1a1a1a;
+            --text-light: #2d3748;
+            --text-dark: #ffffff;
+            --text-muted-light: #718096;
+            --text-muted-dark: #a0aec0;
+            --card-light: #ffffff;
+            --card-dark: #2d3748;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-dark: rgba(0, 0, 0, 0.4);
         }
 
-        [data-theme="purple"] {
-            --bg: #fafafa;
-            --text: #1a1a2e;
-            --text-light: #666680;
-            --accent: #9333ea;
-            --accent-hover: #a855f7;
-            --border: #e2e8f0;
-            --card-bg: #ffffff;
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            background: var(--bg-light);
+            color: var(--text-light);
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
-        body { background: var(--bg); color: var(--text); }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        body.dark-theme {
+            background: var(--bg-dark);
+            color: var(--text-dark);
+        }
 
+        h1, h2, h3 {
+            font-family: Georgia, serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
         header {
-            position: sticky; top: 0; padding: 24px 0;
-            background: var(--bg); border-bottom: 1px solid var(--border);
-            z-index: 100; backdrop-filter: blur(12px);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            background: var(--bg-light);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: background 0.3s ease;
         }
-        nav { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+
+        body.dark-theme header {
+            background: var(--bg-dark);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-light {
+            display: block;
+        }
+
+        .logo-dark {
+            display: none;
+        }
+
+        body.dark-theme .logo-light {
+            display: none;
+        }
+
+        body.dark-theme .logo-dark {
+            display: block;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
         .theme-toggle {
             background: transparent;
-            border: 1.5px solid var(--accent);
-            color: var(--accent);
-            padding: 10px 20px;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 24px;
             border-radius: 50px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 14px;
             transition: all 0.3s ease;
         }
+
         .theme-toggle:hover {
-            background: var(--accent);
-            color: var(--bg);
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
         }
 
-        .hero { padding: 140px 0 100px; text-align: center; }
-        h1 {
-            font-size: 68px; font-weight: 800; letter-spacing: -2.5px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 100px 0;
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .hero-content {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        body.dark-theme .hero-content {
+            background: var(--card-dark);
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 24px;
-        }
-        .subtitle {
-            font-size: 21px;
-            color: var(--text-light);
-            max-width: 680px;
-            margin: 0 auto 48px;
-        }
-        .cta-button {
-            display: inline-block;
-            padding: 18px 40px;
-            background: var(--accent);
-            color: white;
-            font-weight: 600;
-            border-radius: 50px;
-            text-decoration: none;
-            box-shadow: 0 10px 30px rgba(255,20,147,0.3);
-            transition: all 0.3s ease;
-        }
-        .cta-button:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(255,20,147,0.4);
-            background: var(--accent-hover);
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 28px;
-        }
-        .card {
-            padding: 40px;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            transition: all 0.4s ease;
-        }
-        .card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            border-color: var(--accent);
-        }
-        [data-theme="purple"] .card:hover {
-            box-shadow: 0 20px 50px rgba(147,51,234,0.15);
+        .hero p {
+            font-size: 20px;
+            color: var(--text-muted-light);
+            max-width: 700px;
+            margin: 0 auto;
         }
 
-        .card h3 { font-size: 22px; margin: 16px 0; }
-        .card p { color: var(--text-light); }
+        body.dark-theme .hero p {
+            color: var(--text-muted-dark);
+        }
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 40px;
+        /* Section */
+        section {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 40px;
             text-align: center;
-            padding: 80px 0;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-        .stat-number {
-            font-size: 56px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin-bottom: 48px;
+            position: relative;
         }
 
-        /* Contact buttons */
-        .contact-buttons {
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            margin: 16px auto 0;
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-card {
+            background: var(--card-light);
+            padding: 48px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            max-width: 900px;
+            margin: 0 auto;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body.dark-theme .about-card {
+            background: var(--card-dark);
+            box-shadow: 0 10px 30px var(--shadow-dark);
+        }
+
+        .about-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px var(--shadow-light);
+        }
+
+        body.dark-theme .about-card:hover {
+            box-shadow: 0 20px 50px var(--shadow-dark);
+        }
+
+        .about-card h3 {
+            font-size: 28px;
+            margin-bottom: 16px;
+            color: var(--primary);
+        }
+
+        .about-card p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--text-muted-light);
+        }
+
+        body.dark-theme .about-card p {
+            color: var(--text-muted-dark);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .skill-chip {
+            background: var(--card-light);
+            padding: 24px 32px;
+            border-radius: 16px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: 0 6px 20px var(--shadow-light);
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        body.dark-theme .skill-chip {
+            background: var(--card-dark);
+            box-shadow: 0 6px 20px var(--shadow-dark);
+        }
+
+        .skill-chip:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 12px 35px var(--shadow-light);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        body.dark-theme .skill-chip:hover {
+            box-shadow: 0 12px 35px var(--shadow-dark);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 40px;
+        }
+
+        .project-card {
+            background: var(--card-light);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        body.dark-theme .project-card {
+            background: var(--card-dark);
+            box-shadow: 0 10px 30px var(--shadow-dark);
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 50px var(--shadow-light);
+        }
+
+        body.dark-theme .project-card:hover {
+            box-shadow: 0 20px 50px var(--shadow-dark);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .project-info {
+            padding: 32px;
+        }
+
+        .project-info h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .project-info p {
+            font-size: 16px;
+            color: var(--text-muted-light);
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+
+        body.dark-theme .project-info p {
+            color: var(--text-muted-dark);
+        }
+
+        .project-tags {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
-            gap: 16px;
-        }
-        .contact-btn {
-            display: inline-block;
-            padding: 14px 32px;
-            border-radius: 999px;
-            font-weight: 600;
-            text-decoration: none;
-            border: 1.5px solid var(--accent);
-            transition: all 0.25s ease, box-shadow 0.35s ease;
-        }
-        .contact-btn.primary {
-            background: var(--accent);
-            color: #ffffff;
-            box-shadow: 0 10px 25px rgba(255,20,147,0.35);
-        }
-        .contact-btn.secondary {
-            background: transparent;
-            color: var(--accent);
-        }
-        .contact-btn:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 18px 40px rgba(0,0,0,0.25);
-            background: var(--accent-hover);
-            color: var(--bg);
-        }
-        [data-theme="purple"] .contact-btn.primary {
-            box-shadow: 0 10px 25px rgba(147,51,234,0.35);
+            gap: 8px;
         }
 
-        footer {
-            padding: 60px 0;
+        .tag {
+            background: rgba(102, 126, 234, 0.1);
+            color: var(--primary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        body.dark-theme .tag {
+            background: rgba(102, 126, 234, 0.2);
+        }
+
+        /* Contact Section */
+        .contact-section {
             text-align: center;
-            color: var(--text-light);
-            font-size: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 80px 40px;
+            border-radius: 24px;
+            color: white;
         }
 
-        @media (max-width: 768px) {
-            h1 { font-size: 48px; }
-            .grid, .stats { grid-template-columns: 1fr; }
+        .contact-section h2 {
+            font-size: 42px;
+            margin-bottom: 16px;
         }
-        @media (max-width: 600px) {
-            .contact-btn {
-                width: 100%;
-                text-align: center;
+
+        .contact-section p {
+            font-size: 20px;
+            margin-bottom: 32px;
+            opacity: 0.95;
+        }
+
+        .hire-btn {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 18px 48px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 18px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .hire-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            background: #f7fafc;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-muted-light);
+            font-size: 14px;
+        }
+
+        body.dark-theme footer {
+            color: var(--text-muted-dark);
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        footer a:hover {
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-card {
+                padding: 32px;
+            }
+
+            .hero-content {
+                padding: 40px 24px;
+            }
+
+            .contact-section {
+                padding: 60px 24px;
             }
         }
 
-        .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
     <header>
         <nav class="container">
-            <div class="logo">MotionCraft</div>
+            <div class="logo-container">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='moonGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23b8a5c2'/%3E%3Cstop offset='100%25' style='stop-color:%23a08ba8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='100' cy='100' r='80' fill='url(%23moonGrad)'/%3E%3Cpath d='M70 80 Q75 60 85 55 Q95 50 100 55 Q105 60 103 70 L100 90 Q98 100 95 105 Q90 115 80 115 Q70 115 65 105 Q60 95 60 85 Z' fill='%232d3748'/%3E%3Cpath d='M110 70 Q115 75 118 82 L125 90 Q130 95 132 100 L140 115 Q145 125 145 130' stroke='%232d3748' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3Cpath d='M115 85 L120 95 L123 100' stroke='%232d3748' stroke-width='2.5' fill='none'/%3E%3Cpath d='M125 95 L128 103 L130 108' stroke='%232d3748' stroke-width='2.5' fill='none'/%3E%3Cpath d='M135 110 L137 118 L138 123' stroke='%232d3748' stroke-width='2.5' fill='none'/%3E%3C/svg%3E" alt="Luna Essence Logo" class="logo-img logo-light">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='moonGradDark' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23b8a5c2'/%3E%3Cstop offset='100%25' style='stop-color:%23a08ba8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='100' cy='100' r='80' fill='url(%23moonGradDark)'/%3E%3Cpath d='M70 80 Q75 60 85 55 Q95 50 100 55 Q105 60 103 70 L100 90 Q98 100 95 105 Q90 115 80 115 Q70 115 65 105 Q60 95 60 85 Z' fill='%232d3748'/%3E%3Cpath d='M110 70 Q115 75 118 82 L125 90 Q130 95 132 100 L140 115 Q145 125 145 130' stroke='%232d3748' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3Cpath d='M115 85 L120 95 L123 100' stroke='%232d3748' stroke-width='2.5' fill='none'/%3E%3Cpath d='M125 95 L128 103 L130 108' stroke='%232d3748' stroke-width='2.5' fill='none'/%3E%3Cpath d='M135 110 L137 118 L138 123' stroke='%232d3748' stroke-width='2.5' fill='none'/%3E%3C/svg%3E" alt="Luna Essence Logo" class="logo-img logo-dark">
+                <span class="logo-text">Luna Essence</span>
+            </div>
             <button class="theme-toggle" onclick="toggleTheme()">Switch Theme</button>
         </nav>
     </header>
 
-    <main class="container">
-        <section class="hero fade-in" id="top">
-            <h1>Short-Form Video Ads & Reels</h1>
-            <p class="subtitle">
-                I edit high-attention social media videos with strong hooks, dynamic cuts,
-                captions and music — ideal for Meta, Instagram Reels and YouTube Shorts.
-            </p>
-            <a href="#work" class="cta-button">View Sample Ad Edits</a>
-        </section>
-
-        <section class="stats fade-in">
-            <div>
-                <div class="stat-number">15–30s</div>
-                <p>Optimised ad length for Meta &amp; Reels.</p>
-            </div>
-            <div>
-                <div class="stat-number">3+</div>
-                <p>Sample ad variations per concept.</p>
-            </div>
-            <div>
-                <div class="stat-number">24h</div>
-                <p>Typical turnaround for short edits.</p>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content fade-in">
+                <h1>Video Editing Portfolio</h1>
+                <p>High-converting short-form ads & product visuals</p>
             </div>
         </section>
 
-        <section id="work" class="fade-in" style="padding:80px 0;">
-            <h2 style="font-size:32px; margin-bottom:20px;">Sample Ad Edits</h2>
-            <p class="subtitle" style="margin-bottom:32px;">
-                Practice projects demonstrating hooks, captions, transitions and music selection.
-            </p>
-
-            <div class="grid">
-                <article class="card">
-                    <h3>Product Promo Ad</h3>
-                    <p>15s vertical ad with fast cuts, bold headline hook and animated captions.</p>
-                    <a href="LINK_1" target="_blank" class="cta-button"
-                       style="padding:10px 20px; font-size:14px;">
-                        Watch sample
-                    </a>
-                </article>
-
-                <article class="card">
-                    <h3>Offer / Discount Reel</h3>
-                    <p>High-energy sale reel with beat-matched cuts and price highlight graphics.</p>
-                    <a href="LINK_2" target="_blank" class="cta-button"
-                       style="padding:10px 20px; font-size:14px;">
-                        Watch sample
-                    </a>
-                </article>
-
-                <article class="card">
-                    <h3>App / Service Explainer</h3>
-                    <p>Short explainer showing problem → solution with clear CTA at the end.</p>
-                    <a href="LINK_3" target="_blank" class="cta-button"
-                       style="padding:10px 20px; font-size:14px;">
-                        Watch sample
-                    </a>
-                </article>
+        <!-- About Section -->
+        <section class="container fade-in">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-card">
+                <h3>About Me</h3>
+                <p>I create modern, high-converting short-form product ads with strong hooks, clean transitions, typography overlays, and fast-paced storytelling. I specialize in reels, Meta ads, and performance-focused video variations.</p>
             </div>
         </section>
 
-        <section id="contact" class="fade-in" style="padding:80px 0; text-align:center;">
-            <h2 style="font-size:32px; margin-bottom:16px;">Let’s work together</h2>
-            <p class="subtitle" style="margin-bottom:32px;">
-                Available for freelance video ad editing, UGC cuts and social media reels.
-            </p>
+        <!-- Skills Section -->
+        <section class="container fade-in">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-chip">Short-form Editing</div>
+                <div class="skill-chip">Product Ads</div>
+                <div class="skill-chip">Transitions & Hooks</div>
+                <div class="skill-chip">Color Correction</div>
+                <div class="skill-chip">Text Animations</div>
+                <div class="skill-chip">Meta Ads Optimization</div>
+                <div class="skill-chip">Motion Graphics (Basic)</div>
+            </div>
+        </section>
 
-            <div class="contact-buttons">
-                <a href="mailto:cele0stialdraco6@gmail.com" class="contact-btn primary">
-                    Contact me by email
-                </a>
-                <a href="https://www.linkedin.com/in/pragati-pandey-0b9a301a8/" target="_blank"
-                   class="contact-btn secondary">
-                    Connect on LinkedIn
-                </a>
+        <!-- Projects Section -->
+        <section class="container fade-in">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1: Perfume Ad -->
+                <div class="project-card">
+                    <div class="video-container">
+                        <!-- Replace with your actual video embed URL -->
+                        <iframe src="YOUR_PERFUME_VIDEO_EMBED_URL" allowfullscreen></iframe>
+                    </div>
+                    <div class="project-info">
+                        <h3>Luxury Perfume Ad</h3>
+                        <p>Elegant 15-second vertical ad featuring smooth transitions, premium typography, and atmospheric lighting to capture the essence of luxury fragrance.</p>
+                        <div class="project-tags">
+                            <span class="tag">Product Ad</span>
+                            <span class="tag">Luxury Brand</span>
+                            <span class="tag">Vertical Format</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Moisturizer Ad -->
+                <div class="project-card">
+                    <div class="video-container">
+                        <!-- Replace with your actual video embed URL -->
+                        <iframe src="YOUR_MOISTURIZER_VIDEO_EMBED_URL" allowfullscreen></iframe>
+                    </div>
+                    <div class="project-info">
+                        <h3>Moisturizer Product Ad</h3>
+                        <p>Fresh, clean aesthetic with beauty-focused color grading, soft transitions, and benefit-driven text overlays for skincare brand promotion.</p>
+                        <div class="project-tags">
+                            <span class="tag">Beauty</span>
+                            <span class="tag">Product Demo</span>
+                            <span class="tag">Meta Ad</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Chocolate/Fruit Ads -->
+                <div class="project-card">
+                    <div class="video-container">
+                        <!-- Replace with your actual video embed URL -->
+                        <iframe src="YOUR_CHOCOLATE_FRUIT_VIDEO_EMBED_URL" allowfullscreen></iframe>
+                    </div>
+                    <div class="project-info">
+                        <h3>Chocolate & Fruit Series</h3>
+                        <p>Vibrant food ads featuring strawberry, raspberry, and blueberry products with appetizing close-ups, dynamic cuts, and playful text animations.</p>
+                        <div class="project-tags">
+                            <span class="tag">Food & Beverage</span>
+                            <span class="tag">Multiple Variations</span>
+                            <span class="tag">Social Media</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="container fade-in">
+            <div class="contact-section">
+                <h2>Want a high-performing ad for your brand?</h2>
+                <p>Let's create something amazing together</p>
+                <a href="mailto:cele0stialdraco6@gmail.com" class="hire-btn">Hire Me</a>
             </div>
         </section>
     </main>
 
     <footer>
-        MotionCraft · Portfolio by Pragati Pandey ·
-        <a href="mailto:cele0stialdraco6@gmail.com">cele0stialdraco6@gmail.com</a> ·
-        <a href="https://www.linkedin.com/in/pragati-pandey-0b9a301a8/" target="_blank">
-            LinkedIn
-        </a>
+        <div class="container">
+            <p>Luna Essence · Portfolio by Pragati Pandey · 
+                <a href="mailto:cele0stialdraco6@gmail.com">cele0stialdraco6@gmail.com</a> · 
+                <a href="https://www.linkedin.com/in/pragati-pandey-0b9a301a8/" target="_blank">LinkedIn</a>
+            </p>
+        </div>
     </footer>
 
     <script>
+        // Theme Toggle
         function toggleTheme() {
-            const current = document.documentElement.getAttribute('data-theme');
-            const next = current === 'purple' ? 'pink' : 'purple';
-            document.documentElement.setAttribute('data-theme', next);
-            localStorage.setItem('motioncraft-theme', next);
+            document.body.classList.toggle('dark-theme');
+            const isDark = document.body.classList.contains('dark-theme');
+            localStorage.setItem('luna-theme', isDark ? 'dark' : 'light');
         }
 
-        const saved = localStorage.getItem('motioncraft-theme') || 'pink';
-        document.documentElement.setAttribute('data-theme', saved);
+        // Load saved theme
+        const savedTheme = localStorage.getItem('luna-theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
 
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', e => {
-                e.preventDefault();
-                document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+        // Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
             });
+        }, {
+            threshold: 0.1
         });
 
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
-        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
 
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
