@@ -4,9 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Luna Essence — Video Editing Portfolio</title>
+    
+    <!-- Preload critical fonts for faster rendering -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
         :root{
@@ -14,70 +18,87 @@
             --text-light:#2d3748; --text-dark:#ffffff; --text-muted-light:#718096; --text-muted-dark:#a0aec0;
             --card-light:#ffffff; --card-dark:#2d3748; --shadow-light: rgba(0,0,0,0.1); --shadow-dark: rgba(0,0,0,0.4);
         }
-
         body{ font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; line-height:1.6; background:var(--bg-light); color:var(--text-light); transition:background .3s,color .3s; }
         body.dark-theme{ background:var(--bg-dark); color:var(--text-dark); }
         h1,h2,h3{ font-family: Georgia, serif; }
         .container{ max-width:1200px; margin:0 auto; padding:0 24px; }
-
         header{ padding:20px 0; position:sticky; top:0; background:var(--bg-light); backdrop-filter:blur(10px); z-index:1000; border-bottom:1px solid rgba(0,0,0,0.05); }
         body.dark-theme header{ background:var(--bg-dark); border-bottom:1px solid rgba(255,255,255,0.08); }
         nav{ display:flex; justify-content:space-between; align-items:center; }
-
         .logo-container{ display:flex; align-items:center; gap:12px; }
         .logo-img{ width:50px; height:50px; }
         .logo-text{ font-size:24px; font-weight:700; letter-spacing:-0.5px; }
         .theme-toggle{ background:transparent; border:2px solid var(--primary); color:var(--primary); padding:10px 24px; border-radius:50px; cursor:pointer; font-weight:600; }
         .theme-toggle:hover{ background:var(--primary); color:#fff; transform:translateY(-2px); }
-
         .hero{ background:linear-gradient(135deg,var(--primary),var(--secondary)); padding:100px 0; text-align:center; margin-bottom:80px; }
         .hero-content{ background:#fff; padding:60px 40px; border-radius:24px; max-width:900px; margin:0 auto; box-shadow:0 20px 60px rgba(0,0,0,.15); }
         body.dark-theme .hero-content{ background:var(--card-dark); }
         .hero h1{ font-size:56px; margin-bottom:20px; background:linear-gradient(135deg,var(--primary),var(--secondary)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
         .hero p{ font-size:20px; color:var(--text-muted-light); max-width:700px; margin:0 auto; }
-
         section{ margin-bottom:80px; }
         .section-title{ font-size:40px; text-align:center; margin-bottom:48px; }
         .section-title::after{ content:''; display:block; width:80px; height:4px; background:linear-gradient(135deg,var(--primary),var(--secondary)); margin:16px auto 0; border-radius:2px; }
-
         .about-card{ background:var(--card-light); padding:48px; border-radius:20px; box-shadow:0 10px 30px var(--shadow-light); max-width:900px; margin:0 auto; }
         body.dark-theme .about-card{ background:var(--card-dark); box-shadow:0 10px 30px var(--shadow-dark); }
         .about-card h3{ font-size:28px; margin-bottom:16px; color:var(--primary); }
         .about-card p{ font-size:18px; line-height:1.8; color:var(--text-muted-light); }
+        body.dark-theme .about-card p{ color:#cbd5e0; }
 
-        .skills-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:24px; max-width:1000px; margin:0 auto; }
-        .skill-chip{ background:var(--card-light); padding:24px 32px; border-radius:16px; text-align:center; font-weight:600; font-size:16px; box-shadow:0 6px 20px var(--shadow-light); }
+        .skills-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:24px; max-width:1000px; margin:0 auto; min-height:200px; }
+        .skill-chip{ background:var(--card-light); padding:24px 32px; border-radius:16px; text-align:center; font-weight:600; font-size:16px; box-shadow:0 6px 20px var(--shadow-light); 
+                     transition:transform .2s ease,box-shadow .2s ease,background .2s ease; cursor:pointer; will-change:transform;
+                     opacity:0; transform:translateY(20px); animation:fadeInUp .4s ease forwards; }
+        .skill-chip:nth-child(1){animation-delay:.05s}.skill-chip:nth-child(2){animation-delay:.1s}
+        .skill-chip:nth-child(3){animation-delay:.15s}.skill-chip:nth-child(4){animation-delay:.2s}
+        .skill-chip:nth-child(5){animation-delay:.25s}.skill-chip:nth-child(6){animation-delay:.3s}
+        .skill-chip:nth-child(7){animation-delay:.35s}
+        @keyframes fadeInUp{to{opacity:1;transform:translateY(0)}}
+        body.dark-theme .skill-chip{ background:rgba(102,126,234,.12); color:#e2e8f0; 
+            box-shadow:0 6px 20px rgba(0,0,0,.3),0 0 0 1px rgba(102,126,234,.2); }
+        .skill-chip:hover{ transform:translateY(-4px) scale(1.02); 
+            box-shadow:0 12px 32px var(--shadow-light),0 0 24px rgba(102,126,234,.4); }
+        body.dark-theme .skill-chip:hover{ background:rgba(102,126,234,.18);
+            box-shadow:0 12px 32px rgba(0,0,0,.5),0 0 32px rgba(102,126,234,.5); }
 
         .projects-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(450px,1fr)); gap:40px; }
-        .project-card{ background:var(--card-light); border-radius:20px; overflow:hidden; box-shadow:0 10px 30px var(--shadow-light); transition:transform .3s,box-shadow .3s; }
+        .project-card{ background:var(--card-light); border-radius:20px; overflow:hidden; box-shadow:0 10px 30px var(--shadow-light); 
+                       transition:transform .3s,box-shadow .3s; will-change:transform; }
         body.dark-theme .project-card{ background:var(--card-dark); box-shadow:0 10px 30px var(--shadow-dark); }
+        .project-card:hover{ transform:translateY(-8px); 
+            box-shadow:0 16px 48px var(--shadow-light),0 0 24px rgba(118,75,162,.3); }
+        body.dark-theme .project-card:hover{ box-shadow:0 16px 48px rgba(0,0,0,.6),0 0 32px rgba(118118,75,162,.4); }
 
-        /* Video container with auto-detect classes */
         .video-container{ position:relative; width:100%; background:#000; overflow:hidden; aspect-ratio:16/9; transition:aspect-ratio .3s ease; }
         .video-container.vertical{ aspect-ratio:9/16; }
         .video-container.vertical video{ object-fit:cover; }
         .video-container.landscape{ aspect-ratio:16/9; }
         .video-container.landscape video{ object-fit:contain; background:#000; }
-
         .video-container video{ position:absolute; inset:0; width:100%; height:100%; border:0; display:block; }
 
         .project-info{ padding:32px; }
         .project-info h3{ font-size:24px; margin-bottom:12px; color:var(--primary); }
         .project-info p{ font-size:16px; color:var(--text-muted-light); margin-bottom:16px; line-height:1.7; }
-
+        body.dark-theme .project-info p{ color:#cbd5e0; }
         .project-tags{ display:flex; flex-wrap:wrap; gap:8px; }
-        .tag{ background:rgba(102,126,234,0.1); color:var(--primary); padding:6px 14px; border-radius:20px; font-size:13px; font-weight:500; }
+        .tag{ background:rgba(102,126,234,.1); color:var(--primary); padding:6px 14px; border-radius:20px; font-size:13px; font-weight:500; }
 
         .contact-section{ text-align:center; background:linear-gradient(135deg,var(--primary),var(--secondary)); padding:80px 40px; border-radius:24px; color:#fff; }
-        .hire-btn{ display:inline-block; background:#fff; color:var(--primary); padding:18px 48px; border-radius:50px; font-weight:700; font-size:18px; text-decoration:none; box-shadow:0 10px 30px rgba(0,0,0,.2); }
+        .hire-btn{ display:inline-block; background:#fff; color:var(--primary); padding:18px 48px; border-radius:50px; font-weight:700; font-size:18px; text-decoration:none; 
+                   box-shadow:0 10px 30px rgba(0,0,0,.2); transition:transform .2s ease,box-shadow .2s ease; will-change:transform; }
+        .hire-btn:hover{ transform:translateY(-3px) scale(1.03); 
+            box-shadow:0 14px 36px rgba(0,0,0,.3),0 0 24px rgba(255,255,255,.4); }
+
+        .theme-toggle:hover{ transform:translateY(-2px) scale(1.05); box-shadow:0 8px 20px rgba(102,126,234,.4); }
 
         footer{ text-align:center; padding:40px 0; color:var(--text-muted-light); font-size:14px; }
+        footer a{ color:var(--primary); text-decoration:none; transition:color .2s ease; }
+        body.dark-theme footer a{ color:#a3bffa; }
+        footer a:hover{ color:var(--secondary); text-decoration:underline; }
 
         @media (max-width:768px){
             .projects-grid{ grid-template-columns:1fr; }
-            .video-container{ aspect-ratio:9/16; } /* safer default on small screens */
+            .video-container{ aspect-ratio:9/16; }
         }
-
         .fade-in{ opacity:0; transform:translateY(30px); transition:opacity .6s, transform .6s; }
         .fade-in.visible{ opacity:1; transform:none; }
     </style>
@@ -92,7 +113,6 @@
             <button class="theme-toggle" onclick="toggleTheme()">Switch Theme</button>
         </nav>
     </header>
-
     <main>
         <section class="hero">
             <div class="hero-content fade-in">
@@ -100,7 +120,6 @@
                 <p>High-converting short-form ads & product visuals</p>
             </div>
         </section>
-
         <section class="container fade-in">
             <h2 class="section-title">About Me</h2>
             <div class="about-card">
@@ -108,7 +127,6 @@
                 <p>I create modern, high-converting short-form product ads with strong hooks, clean transitions, typography overlays, and fast-paced storytelling. I specialize in reels, Meta ads, and performance-focused video variations.</p>
             </div>
         </section>
-
         <section class="container fade-in">
             <h2 class="section-title">Skills</h2>
             <div class="skills-grid">
@@ -121,12 +139,9 @@
                 <div class="skill-chip">Motion Graphics (Basic)</div>
             </div>
         </section>
-
         <section class="container fade-in">
             <h2 class="section-title">Projects</h2>
-
             <div class="projects-grid">
-                <!-- Perfume (vertical reel) - using perfume_ad.mp4 -->
                 <div class="project-card">
                     <div class="video-container">
                         <video playsinline preload="metadata" controls poster="perfume-ad.png">
@@ -140,8 +155,6 @@
                         <div class="project-tags"><span class="tag">Product Ad</span><span class="tag">Luxury</span><span class="tag">Vertical/Short-form</span></div>
                     </div>
                 </div>
-
-                <!-- Moisturizer (landscape) - using moisturizer_ad.mp4 -->
                 <div class="project-card">
                     <div class="video-container">
                         <video playsinline preload="metadata" controls poster="moisturizer-ad.png">
@@ -155,8 +168,6 @@
                         <div class="project-tags"><span class="tag">Beauty</span><span class="tag">Meta Ad</span><span class="tag">Product Demo</span></div>
                     </div>
                 </div>
-
-                <!-- Chocolate/Fruit (landscape) - using chocolates_ad.mp4 -->
                 <div class="project-card">
                     <div class="video-container">
                         <video playsinline preload="metadata" controls poster="chocolate-ad.png">
@@ -172,28 +183,23 @@
                 </div>
             </div>
         </section>
-
         <section class="container fade-in">
             <div class="contact-section">
                 <h2>Want a high-performing ad for your brand?</h2>
                 <p>Let's create something amazing together</p>
-                <a class="hire-btn" href="mailto:cele0stialdraco6@gmail.com">Hire Me</a>
+                <a class="hire-btn" href="mailto:celestialdraco6@gmail.com">Hire Me</a>
             </div>
         </section>
     </main>
-
     <footer>
         <div class="container">
-            <p>Luna Essence · Portfolio by Pragati Pandey · <a href="mailto:cele0stialdraco6@gmail.com">cele0stialdraco6@gmail.com</a> · <a href="https://www.linkedin.com/in/pragati-pandey-0b9a301a8/" target="_blank">LinkedIn</a></p>
+            <p>Luna Essence · Portfolio by Pragati Pandey · <a href="mailto:celestialdraco6@gmail.com">celestialdraco6@gmail.com</a> · <a href="https://www.linkedin.com/in/pragati-pandey-0b9a301a8/" target="_blank">LinkedIn</a></p>
         </div>
     </footer>
-
     <script>
-        // Theme toggle
         function toggleTheme(){ document.body.classList.toggle('dark-theme'); localStorage.setItem('luna-theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light'); }
         if(localStorage.getItem('luna-theme') === 'dark'){ document.body.classList.add('dark-theme'); }
 
-        // auto-detect video aspect and set container class
         function detectVideoAspectRatio(){
             document.querySelectorAll('.video-container video').forEach(video=>{
                 const setClass = () => {
@@ -211,7 +217,6 @@
         }
         if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', detectVideoAspectRatio); } else detectVideoAspectRatio();
 
-        // reveal on scroll
         const observer = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
         document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
     </script>
