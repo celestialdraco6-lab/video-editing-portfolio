@@ -1,471 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Luna Essence — Video Editing Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root{
+            --primary:#667eea;
+            --secondary:#764ba2;
+            --bg-light:#fafafa;
+            --bg-dark:#1a1a1a;
+            --text-light:#2d3748;
+            --text-dark:#ffffff;
+            --text-muted-light:#718096;
+            --text-muted-dark:#a0aec0;
+            --card-light:#ffffff;
+            --card-dark:#2d3748;
+            --shadow-light: rgba(0,0,0,0.1);
+            --shadow-dark: rgba(0,0,0,0.4);
         }
 
-        :root {
-            --primary: #667eea;
-            --secondary: #764ba2;
-            --bg-light: #fafafa;
-            --bg-dark: #1a1a1a;
-            --text-light: #2d3748;
-            --text-dark: #ffffff;
-            --text-muted-light: #718096;
-            --text-muted-dark: #a0aec0;
-            --card-light: #ffffff;
-            --card-dark: #2d3748;
-            --shadow-light: rgba(0, 0, 0, 0.1);
-            --shadow-dark: rgba(0, 0, 0, 0.4);
-        }
-
-        body {
+        body{
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.6;
-            background: var(--bg-light);
-            color: var(--text-light);
+            line-height:1.6;
+            background:var(--bg-light);
+            color:var(--text-light);
             transition: background 0.3s ease, color 0.3s ease;
         }
 
-        body.dark-theme {
-            background: var(--bg-dark);
-            color: var(--text-dark);
-        }
+        body.dark-theme{ background:var(--bg-dark); color:var(--text-dark); }
 
-        h1, h2, h3 {
-            font-family: Georgia, serif;
-        }
+        h1,h2,h3{ font-family: Georgia, serif; }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+        .container{ max-width:1200px; margin:0 auto; padding:0 24px; }
 
-        /* Header */
-        header {
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            background: var(--bg-light);
+        header{
+            padding:20px 0;
+            position:sticky;
+            top:0;
+            background:var(--bg-light);
             backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            z-index:1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
             transition: background 0.3s ease;
         }
-
-        body.dark-theme header {
-            background: var(--bg-dark);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        body.dark-theme header{
+            background:var(--bg-dark);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        nav{ display:flex; justify-content:space-between; align-items:center; }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .logo-container{ display:flex; align-items:center; gap:12px; }
+        .logo-img{ width:50px; height:50px; transition:opacity 0.3s ease; }
+        .logo-light{ display:block; }
+        .logo-dark{ display:none; }
+        body.dark-theme .logo-light{ display:none; }
+        body.dark-theme .logo-dark{ display:block; }
+        .logo-text{ font-size:24px; font-weight:700; letter-spacing:-0.5px; }
 
-        .logo-img {
-            width: 50px;
-            height: 50px;
-            transition: opacity 0.3s ease;
-        }
-
-        .logo-light {
-            display: block;
-        }
-
-        .logo-dark {
-            display: none;
-        }
-
-        body.dark-theme .logo-light {
-            display: none;
-        }
-
-        body.dark-theme .logo-dark {
-            display: block;
-        }
-
-        .logo-text {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-
-        .theme-toggle {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            padding: 10px 24px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
+        .theme-toggle{
+            background:transparent;
+            border:2px solid var(--primary);
+            color:var(--primary);
+            padding:10px 24px;
+            border-radius:50px;
+            cursor:pointer;
+            font-weight:600;
+            font-size:14px;
             transition: all 0.3s ease;
         }
+        .theme-toggle:hover{ background:var(--primary); color:white; transform:translateY(-2px); }
 
-        .theme-toggle:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* Hero Section */
-        .hero {
+        .hero{
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            padding: 100px 0;
-            text-align: center;
-            margin-bottom: 80px;
+            padding:100px 0;
+            text-align:center;
+            margin-bottom:80px;
         }
-
-        .hero-content {
-            background: white;
-            padding: 60px 40px;
-            border-radius: 24px;
-            max-width: 900px;
-            margin: 0 auto;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        .hero-content{
+            background:white;
+            padding:60px 40px;
+            border-radius:24px;
+            max-width:900px;
+            margin:0 auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
         }
-
-        body.dark-theme .hero-content {
-            background: var(--card-dark);
-        }
-
-        .hero h1 {
-            font-size: 56px;
-            margin-bottom: 20px;
+        body.dark-theme .hero-content{ background:var(--card-dark); }
+        .hero h1{
+            font-size:56px;
+            margin-bottom:20px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        .hero p{ font-size:20px; color:var(--text-muted-light); max-width:700px; margin:0 auto; }
+        body.dark-theme .hero p{ color:var(--text-muted-dark); }
 
-        .hero p {
-            font-size: 20px;
-            color: var(--text-muted-light);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        body.dark-theme .hero p {
-            color: var(--text-muted-dark);
-        }
-
-        /* Section */
-        section {
-            margin-bottom: 80px;
-        }
-
-        .section-title {
-            font-size: 40px;
-            text-align: center;
-            margin-bottom: 48px;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
+        section{ margin-bottom:80px; }
+        .section-title{ font-size:40px; text-align:center; margin-bottom:48px; position:relative; }
+        .section-title::after{
+            content:''; display:block; width:80px; height:4px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            margin: 16px auto 0;
-            border-radius: 2px;
+            margin:16px auto 0; border-radius:2px;
         }
 
-        /* About Section */
-        .about-card {
-            background: var(--card-light);
-            padding: 48px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px var(--shadow-light);
-            max-width: 900px;
-            margin: 0 auto;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .about-card{
+            background:var(--card-light);
+            padding:48px; border-radius:20px; box-shadow:0 10px 30px var(--shadow-light);
+            max-width:900px; margin:0 auto; transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+        body.dark-theme .about-card{ background:var(--card-dark); box-shadow:0 10px 30px var(--shadow-dark); }
+        .about-card:hover{ transform:translateY(-8px); box-shadow:0 20px 50px var(--shadow-light); }
+        body.dark-theme .about-card:hover{ box-shadow:0 20px 50px var(--shadow-dark); }
+        .about-card h3{ font-size:28px; margin-bottom:16px; color:var(--primary); }
+        .about-card p{ font-size:18px; line-height:1.8; color:var(--text-muted-light); }
+        body.dark-theme .about-card p{ color:var(--text-muted-dark); }
 
-        body.dark-theme .about-card {
-            background: var(--card-dark);
-            box-shadow: 0 10px 30px var(--shadow-dark);
+        .skills-grid{
+            display:grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:24px; max-width:1000px; margin:0 auto;
         }
-
-        .about-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 50px var(--shadow-light);
+        .skill-chip{
+            background:var(--card-light); padding:24px 32px; border-radius:16px; text-align:center; font-weight:600;
+            font-size:16px; box-shadow:0 6px 20px var(--shadow-light); transition: all 0.3s ease; cursor:default;
         }
-
-        body.dark-theme .about-card:hover {
-            box-shadow: 0 20px 50px var(--shadow-dark);
-        }
-
-        .about-card h3 {
-            font-size: 28px;
-            margin-bottom: 16px;
-            color: var(--primary);
-        }
-
-        .about-card p {
-            font-size: 18px;
-            line-height: 1.8;
-            color: var(--text-muted-light);
-        }
-
-        body.dark-theme .about-card p {
-            color: var(--text-muted-dark);
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 24px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .skill-chip {
-            background: var(--card-light);
-            padding: 24px 32px;
-            border-radius: 16px;
-            text-align: center;
-            font-weight: 600;
-            font-size: 16px;
-            box-shadow: 0 6px 20px var(--shadow-light);
-            transition: all 0.3s ease;
-            cursor: default;
-        }
-
-        body.dark-theme .skill-chip {
-            background: var(--card-dark);
-            box-shadow: 0 6px 20px var(--shadow-dark);
-        }
-
-        .skill-chip:hover {
-            transform: translateY(-6px) scale(1.03);
-            box-shadow: 0 12px 35px var(--shadow-light);
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-        }
-
-        body.dark-theme .skill-chip:hover {
-            box-shadow: 0 12px 35px var(--shadow-dark);
-        }
+        body.dark-theme .skill-chip{ background:var(--card-dark); box-shadow:0 6px 20px var(--shadow-dark); }
+        .skill-chip:hover{ transform:translateY(-6px) scale(1.03); box-shadow:0 12px 35px var(--shadow-light); background: linear-gradient(135deg,var(--primary),var(--secondary)); color:white; }
+        body.dark-theme .skill-chip:hover{ box-shadow:0 12px 35px var(--shadow-dark); }
 
         /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 40px;
+        .projects-grid{
+            display:grid; grid-template-columns: repeat(auto-fit, minmax(450px,1fr)); gap:40px;
         }
-
-        .project-card {
-            background: var(--card-light);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px var(--shadow-light);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .project-card{
+            background:var(--card-light); border-radius:20px; overflow:hidden; box-shadow:0 10px 30px var(--shadow-light); transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+        body.dark-theme .project-card{ background:var(--card-dark); box-shadow:0 10px 30px var(--shadow-dark); }
+        .project-card:hover{ transform:translateY(-12px); box-shadow:0 20px 50px var(--shadow-light); }
+        body.dark-theme .project-card:hover{ box-shadow:0 20px 50px var(--shadow-dark); }
 
-        body.dark-theme .project-card {
-            background: var(--card-dark);
-            box-shadow: 0 10px 30px var(--shadow-dark);
-        }
-
-        .project-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 20px 50px var(--shadow-light);
-        }
-
-        body.dark-theme .project-card:hover {
-            box-shadow: 0 20px 50px var(--shadow-dark);
-        }
-
-        .video-container {
+        /* Updated video container: use modern aspect-ratio so vertical reels display correctly */
+        .video-container{
             position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            background: #000;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
-            border: none;
+            background: #000;
+            overflow: hidden;
+            /* default to vertical reel aspect ratio (9:16). If you have horizontal ads, they will letterbox inside */
+            aspect-ratio: 9 / 16;
+        }
+        /* ensure video/iframe fill the container */
+        .video-container video,
+        .video-container iframe{
+            position:absolute; inset:0; width:100%; height:100%; object-fit: cover; border:0;
+            display:block;
         }
 
-        .project-info {
-            padding: 32px;
+        .project-info{ padding:32px; }
+        .project-info h3{ font-size:24px; margin-bottom:12px; color:var(--primary); }
+        .project-info p{ font-size:16px; color:var(--text-muted-light); margin-bottom:16px; line-height:1.7; }
+        body.dark-theme .project-info p{ color:var(--text-muted-dark); }
+        .project-tags{ display:flex; flex-wrap:wrap; gap:8px; }
+        .tag{ background: rgba(102,126,234,0.1); color:var(--primary); padding:6px 14px; border-radius:20px; font-size:13px; font-weight:500; }
+        body.dark-theme .tag{ background: rgba(102,126,234,0.18); }
+
+        .contact-section{
+            text-align:center;
+            background: linear-gradient(135deg,var(--primary),var(--secondary));
+            padding:80px 40px; border-radius:24px; color:white;
+        }
+        .contact-section h2{ font-size:42px; margin-bottom:16px; }
+        .contact-section p{ font-size:20px; margin-bottom:32px; opacity:0.95; }
+        .hire-btn{
+            display:inline-block; background:white; color:var(--primary); padding:18px 48px; border-radius:50px; font-weight:700; font-size:18px; text-decoration:none; transition:all 0.3s ease; box-shadow:0 10px 30px rgba(0,0,0,0.2);
+        }
+        .hire-btn:hover{ transform:translateY(-4px) scale(1.05); box-shadow:0 15px 40px rgba(0,0,0,0.3); background:#f7fafc; }
+
+        footer{ text-align:center; padding:40px 0; color:var(--text-muted-light); font-size:14px; }
+        body.dark-theme footer{ color:var(--text-muted-dark); }
+        footer a{ color:var(--primary); text-decoration:none; transition:opacity 0.3s ease; }
+        footer a:hover{ opacity:0.7; }
+
+        @media (max-width:768px){
+            .hero h1{ font-size:40px; }
+            .hero p{ font-size:18px; }
+            .section-title{ font-size:32px; }
+            .projects-grid{ grid-template-columns: 1fr; }
+            .skills-grid{ grid-template-columns: 1fr; }
+            .about-card{ padding:32px; }
+            .hero-content{ padding:40px 24px; }
+            .contact-section{ padding:60px 24px; }
+            /* on small screens, make the video container taller for visibility */
+            .video-container{ aspect-ratio: 9/16; }
         }
 
-        .project-info h3 {
-            font-size: 24px;
-            margin-bottom: 12px;
-            color: var(--primary);
-        }
+        html{ scroll-behavior: smooth; }
 
-        .project-info p {
-            font-size: 16px;
-            color: var(--text-muted-light);
-            margin-bottom: 16px;
-            line-height: 1.7;
-        }
-
-        body.dark-theme .project-info p {
-            color: var(--text-muted-dark);
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .tag {
-            background: rgba(102, 126, 234, 0.1);
-            color: var(--primary);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        body.dark-theme .tag {
-            background: rgba(102, 126, 234, 0.2);
-        }
-
-        /* Contact Section */
-        .contact-section {
-            text-align: center;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            padding: 80px 40px;
-            border-radius: 24px;
-            color: white;
-        }
-
-        .contact-section h2 {
-            font-size: 42px;
-            margin-bottom: 16px;
-        }
-
-        .contact-section p {
-            font-size: 20px;
-            margin-bottom: 32px;
-            opacity: 0.95;
-        }
-
-        .hire-btn {
-            display: inline-block;
-            background: white;
-            color: var(--primary);
-            padding: 18px 48px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 18px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .hire-btn:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-            background: #f7fafc;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            color: var(--text-muted-light);
-            font-size: 14px;
-        }
-
-        body.dark-theme footer {
-            color: var(--text-muted-dark);
-        }
-
-        footer a {
-            color: var(--primary);
-            text-decoration: none;
-            transition: opacity 0.3s ease;
-        }
-
-        footer a:hover {
-            opacity: 0.7;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 40px;
-            }
-
-            .hero p {
-                font-size: 18px;
-            }
-
-            .section-title {
-                font-size: 32px;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .about-card {
-                padding: 32px;
-            }
-
-            .hero-content {
-                padding: 40px 24px;
-            }
-
-            .contact-section {
-                padding: 60px 24px;
-            }
-        }
-
-        /* Smooth Scroll */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Animation */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .fade-in{ opacity:0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .fade-in.visible{ opacity:1; transform: translateY(0); }
     </style>
 </head>
 <body>
@@ -515,58 +252,68 @@
         <!-- Projects Section -->
         <section class="container fade-in">
             <h2 class="section-title">Projects</h2>
+
+            <!-- START: projects-grid (updated to use local video files you uploaded) -->
             <div class="projects-grid">
-                <!-- Project 1: Perfume Ad -->
-                <div class="project-card">
-                    <div class="video-container">
-                        <!-- Replace with your actual video embed URL -->
-                        <iframe src="YOUR_PERFUME_VIDEO_EMBED_URL" allowfullscreen></iframe>
-                    </div>
-                    <div class="project-info">
-                        <h3>Luxury Perfume Ad</h3>
-                        <p>Elegant 15-second vertical ad featuring smooth transitions, premium typography, and atmospheric lighting to capture the essence of luxury fragrance.</p>
-                        <div class="project-tags">
-                            <span class="tag">Product Ad</span>
-                            <span class="tag">Luxury Brand</span>
-                            <span class="tag">Vertical Format</span>
-                        </div>
-                    </div>
+              <!-- Project 1: Perfume Ad (uses perfume_ad.mov + poster) -->
+              <div class="project-card">
+                <div class="video-container">
+                  <video playsinline preload="metadata" controls poster="/perfume-ad.png">
+                    <source src="/perfume_ad.mov" type="video/quicktime">
+                    Your browser does not support the video tag. Try downloading: <a href="/perfume_ad.mov">perfume_ad.mov</a>
+                  </video>
                 </div>
+                <div class="project-info">
+                  <h3>Luxury Perfume Ad</h3>
+                  <p>Elegant short-form ad using soft-focus product shots, slow-mo reveals and premium typography to capture fragrance mood.</p>
+                  <div class="project-tags">
+                    <span class="tag">Product Ad</span>
+                    <span class="tag">Luxury</span>
+                    <span class="tag">Vertical/Short-form</span>
+                  </div>
+                </div>
+              </div>
 
-                <!-- Project 2: Moisturizer Ad -->
-                <div class="project-card">
-                    <div class="video-container">
-                        <!-- Replace with your actual video embed URL -->
-                        <iframe src="YOUR_MOISTURIZER_VIDEO_EMBED_URL" allowfullscreen></iframe>
-                    </div>
-                    <div class="project-info">
-                        <h3>Moisturizer Product Ad</h3>
-                        <p>Fresh, clean aesthetic with beauty-focused color grading, soft transitions, and benefit-driven text overlays for skincare brand promotion.</p>
-                        <div class="project-tags">
-                            <span class="tag">Beauty</span>
-                            <span class="tag">Product Demo</span>
-                            <span class="tag">Meta Ad</span>
-                        </div>
-                    </div>
+              <!-- Project 2: Moisturizer Ad (mp4 + poster) -->
+              <div class="project-card">
+                <div class="video-container">
+                  <video playsinline preload="metadata" controls poster="/moisturizer-ad.png">
+                    <source src="/moisturizer_ad.mp4" type="video/mp4">
+                    Your browser does not support the video tag. Try downloading: <a href="/moisturizer_ad.mp4">moisturizer_ad.mp4</a>
+                  </video>
                 </div>
+                <div class="project-info">
+                  <h3>Moisturizer Product Ad</h3>
+                  <p>Clean beauty reel with benefit-led overlays (hydration, lightweight feel), soft color grade and readable captions for social performance.</p>
+                  <div class="project-tags">
+                    <span class="tag">Beauty</span>
+                    <span class="tag">Meta Ad</span>
+                    <span class="tag">Product Demo</span>
+                  </div>
+                </div>
+              </div>
 
-                <!-- Project 3: Chocolate/Fruit Ads -->
-                <div class="project-card">
-                    <div class="video-container">
-                        <!-- Replace with your actual video embed URL -->
-                        <iframe src="YOUR_CHOCOLATE_FRUIT_VIDEO_EMBED_URL" allowfullscreen></iframe>
-                    </div>
-                    <div class="project-info">
-                        <h3>Chocolate & Fruit Series</h3>
-                        <p>Vibrant food ads featuring strawberry, raspberry, and blueberry products with appetizing close-ups, dynamic cuts, and playful text animations.</p>
-                        <div class="project-tags">
-                            <span class="tag">Food & Beverage</span>
-                            <span class="tag">Multiple Variations</span>
-                            <span class="tag">Social Media</span>
-                        </div>
-                    </div>
+              <!-- Project 3: Chocolate/Fruit Ads (mp4 + poster) -->
+              <div class="project-card">
+                <div class="video-container">
+                  <video playsinline preload="metadata" controls poster="/chocolate-ad.png">
+                    <source src="/chocolates_ad.mp4" type="video/mp4">
+                    Your browser does not support the video tag. Try downloading: <a href="/chocolates_ad.mp4">chocolates_ad.mp4</a>
+                  </video>
                 </div>
+                <div class="project-info">
+                  <h3>Chocolate & Fruit Series</h3>
+                  <p>Bright, appetizing edits with close-ups, playful type and quick cuts for multiple product variations (strawberry, raspberry, blueberry).</p>
+                  <div class="project-tags">
+                    <span class="tag">Food & Beverage</span>
+                    <span class="tag">Variations</span>
+                    <span class="tag">Social</span>
+                  </div>
+                </div>
+              </div>
             </div>
+            <!-- END: projects-grid -->
+
         </section>
 
         <!-- Contact Section -->
@@ -581,8 +328,8 @@
 
     <footer>
         <div class="container">
-            <p>Luna Essence · Portfolio by Pragati Pandey · 
-                <a href="mailto:cele0stialdraco6@gmail.com">cele0stialdraco6@gmail.com</a> · 
+            <p>Luna Essence · Portfolio by Pragati Pandey ·
+                <a href="mailto:cele0stialdraco6@gmail.com">cele0stialdraco6@gmail.com</a> ·
                 <a href="https://www.linkedin.com/in/pragati-pandey-0b9a301a8/" target="_blank">LinkedIn</a>
             </p>
         </div>
