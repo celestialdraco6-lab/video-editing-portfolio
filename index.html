@@ -1,109 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Luna Essence Video Editing Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="style.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luna Essence – Video Editing Portfolio</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header>
-  <nav class="container" aria-label="Main navigation">
-    <div class="logo-container">
-      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='moonGrad' x1='0.25' y1='0.25' x2='1' y2='1'%3E%3Cstop offset='0%' stop-color='%2323b8a5c2' /%3E%3Cstop offset='100%' stop-color='%233a08ba83' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='100' cy='100' r='80' fill='url(%23moonGrad)'/%3E%3Cpath d='M70 80 Q75 60 85 55 Q95 50 100 55 Q105 60 103 70 L100 90 Q98 100 95 105 Q90 115 80 115 Q70 115 65 105 Q60 95 60 85 Z' fill='%23232d3748'/%3E%3C/svg%3E" alt="Luna Essence Logo" class="logo-img" />
-      <span class="logo-text">Luna Essence</span>
-    </div>
-    <button class="theme-toggle" aria-pressed="false" aria-label="Switch Theme">Switch Theme</button>
-  </nav>
-</header>
-
-<main class="container" role="main">
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Video Editing Portfolio</h1>
-      <p>High-converting short-form ads product visuals</p>
-    </div>
-  </section>
-
-  <section class="about section fade-in">
-    <h2 class="section-title">About Me</h2>
-    <div class="about-card">
-      <h3>About Me</h3>
-      <p>I create modern, high-converting short-form product ads with strong hooks, clean transitions, typography overlays, and fast-paced storytelling. I specialize in reels, Meta ads, and performance-focused video variations.</p>
-    </div>
-  </section>
-
-  <section class="skills section fade-in">
-    <h2 class="section-title">Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-chip">Short-form Editing</div>
-      <div class="skill-chip">Product Ads</div>
-      <div class="skill-chip">Transitions & Hooks</div>
-      <div class="skill-chip">Color Correction</div>
-      <div class="skill-chip">Text Animations</div>
-      <div class="skill-chip">Meta Ads Optimization</div>
-      <div class="skill-chip">Motion Graphics Basic</div>
-    </div>
-  </section>
-
-  <section class="projects section fade-in">
-    <h2 class="section-title">Projects</h2>
-    <div class="projects-grid">
-      
-      <!-- Example Project Card. Repeat for each project -->
-      <article class="project-card vertical" data-orientation="vertical">
-        <div class="thumb-wrap">
-          <img src="LIPSTICKad.jpg" alt="Lipstick Launch Ad" class="project-thumb" />
-          <div class="play-overlay">
-            <button class="play-btn video-thumb-btn" data-video="videolipstickad.mp4" data-poster="LIPSTICKad.jpg" aria-controls="videoModal" aria-label="Play Lipstick Launch Ad">
-              <svg class="play-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 2.7v18.6L20 12 4 2.7z" />
-              </svg>
+    <!-- Header -->
+    <header>
+        <nav class="container" aria-label="Main navigation">
+            <div class="logo-container">
+                <img class="logo-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='moonGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23b8a5c2'/%3E%3Cstop offset='100%25' style='stop-color:%23a08ba8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='100' cy='100' r='80' fill='url(%23moonGrad)'/%3E%3Cpath d='M70 80 Q75 60 85 55 Q95 50 100 55 Q105 60 103 70 L100 90 Q98 100 95 105 Q90 115 80 115 Q70 115 65 105 Q60 95 60 85 Z' fill='%232d3748'/%3E%3C/svg%3E" alt="Luna Essence Logo">
+                <span class="logo-text">Luna Essence</span>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <span class="theme-icon">🌙</span>
             </button>
-          </div>
-        </div>
-        <div class="project-info">
-          <h3>Lipstick Launch Ad</h3>
-          <p>High-impact lipstick promo with macro product shots, powder bursts and bold color reveals built for social traction.</p>
-          <div class="project-tags">
-            <span class="tag">Beauty</span>
-            <span class="tag">Launch</span>
-            <span class="tag">Macro</span>
-          </div>
-        </div>
-      </article>
+        </nav>
+    </header>
 
-      <!-- Add your other projects similarly with either class="vertical" or class="horizontal" 
-           and updated src and data-poster/video attributes -->
+    <main class="container" role="main">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Video Editing Portfolio</h1>
+                <p class="hero-subtitle">High-converting short-form ads & product visuals</p>
+                <div class="hero-glow"></div>
+            </div>
+        </section>
 
+        <!-- About Section -->
+        <section class="section-wrapper fade-in">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-card glass-card">
+                <div class="card-glow"></div>
+                <h3>Crafting Visual Stories</h3>
+                <p>I create modern, high-converting short-form product ads with strong hooks, clean transitions, typography overlays, and fast-paced storytelling. I specialize in reels, Meta ads, and performance-focused video variations that drive results.</p>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="section-wrapper fade-in">
+            <h2 class="section-title">Skills & Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-chip">Short-form Editing</div>
+                <div class="skill-chip">Product Ads</div>
+                <div class="skill-chip">Transitions & Hooks</div>
+                <div class="skill-chip">Color Correction</div>
+                <div class="skill-chip">Text Animations</div>
+                <div class="skill-chip">Meta Ads Optimization</div>
+                <div class="skill-chip">Motion Graphics</div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="section-wrapper fade-in">
+            <h2 class="section-title">Featured Projects</h2>
+            
+            <!-- Vertical Reels -->
+            <div class="project-category">
+                <h3 class="category-label">Vertical Reels & Stories</h3>
+                <div class="projects-grid vertical-grid">
+                    
+                    <!-- Perfume Ad - VERTICAL -->
+                    <article class="project-card vertical" data-orientation="vertical">
+                        <div class="card-inner">
+                            <div class="thumb-wrap">
+                                <img class="project-thumb" 
+                                     src="perfume-ad.png" 
+                                     alt="Luxury Perfume Ad"
+                                     style="object-position: center 48%;">
+                                <div class="play-overlay">
+                                    <button class="play-btn" 
+                                            data-video="perfume_ad.mp4" 
+                                            data-poster="perfume-ad.png"
+                                            aria-label="Play Luxury Perfume Ad">
+                                        <svg class="play-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8 5v14l11-7z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-info">
+                                <h3>Luxury Perfume Ad</h3>
+                                <p>Elegant short-form ad with soft-focus product shots, slow-mo reveals, and premium typography to communicate mood and craft.</p>
+                                <div class="project-tags">
+                                    <span class="tag">Product Ad</span>
+                                    <span class="tag">Luxury</span>
+                                    <span class="tag">9:16</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Serum Ad - VERTICAL -->
+                    <article class="project-card vertical" data-orientation="vertical">
+                        <div class="card-inner">
+                            <div class="thumb-wrap">
+                                <img class="project-thumb" 
+                                     src="serum_ad.jpg" 
+                                     alt="Serum Glow Ad"
+                                     style="object-position: center 24%;">
+                                <div class="play-overlay">
+                                    <button class="play-btn" 
+                                            data-video="serum_ad_lite.mp4" 
+                                            data-poster="serum_ad.jpg"
+                                            aria-label="Play Serum Ad">
+                                        <svg class="play-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8 5v14l11-7z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-info">
+                                <h3>Serum Glow Ad</h3>
+                                <p>Calm cinematic skincare spot focusing on bottle hero shots, glow transitions, and a benefit-led script that converts.</p>
+                                <div class="project-tags">
+                                    <span class="tag">Skincare</span>
+                                    <span class="tag">Cinematic</span>
+                                    <span class="tag">9:16</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Lipstick Ad - VERTICAL -->
+                    <article class="project-card vertical" data-orientation="vertical">
+                        <div class="card-inner">
+                            <div class="thumb-wrap">
+                                <img class="project-thumb" 
+                                     src="LIPSTICK_ad.jpg" 
+                                     alt="Lipstick Launch Ad"
+                                     style="object-position: center 40%;">
+                                <div class="play-overlay">
+                                    <button class="play-btn" 
+                                            data-video="lipstick_ad.mp4" 
+                                            data-poster="LIPSTICK_ad.jpg"
+                                            aria-label="Play Lipstick Ad">
+                                        <svg class="play-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8 5v14l11-7z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-info">
+                                <h3>Lipstick Launch Ad</h3>
+                                <p>High-impact lipstick promo with macro product shots, powder bursts and bold color reveals built for social traction.</p>
+                                <div class="project-tags">
+                                    <span class="tag">Beauty</span>
+                                    <span class="tag">Launch</span>
+                                    <span class="tag">9:16</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+
+            <!-- Landscape Videos -->
+            <div class="project-category">
+                <h3 class="category-label">Landscape Ads</h3>
+                <div class="projects-grid landscape-grid">
+                    
+                    <!-- Moisturizer Ad - LANDSCAPE -->
+                    <article class="project-card landscape" data-orientation="landscape">
+                        <div class="card-inner">
+                            <div class="thumb-wrap">
+                                <img class="project-thumb" 
+                                     src="moisturizer-ad.png" 
+                                     alt="Moisturizer Product Ad"
+                                     style="object-position: center center;">
+                                <div class="play-overlay">
+                                    <button class="play-btn" 
+                                            data-video="moisturizer_ad.mp4" 
+                                            data-poster="moisturizer-ad.png"
+                                            aria-label="Play Moisturizer Ad">
+                                        <svg class="play-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8 5v14l11-7z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-info">
+                                <h3>Moisturizer Product Ad</h3>
+                                <p>Clean beauty reel with benefit-led overlays, soft color grade and readable captions optimized for conversion.</p>
+                                <div class="project-tags">
+                                    <span class="tag">Beauty</span>
+                                    <span class="tag">Meta Ad</span>
+                                    <span class="tag">16:9</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Chocolate Ad - LANDSCAPE -->
+                    <article class="project-card landscape" data-orientation="landscape">
+                        <div class="card-inner">
+                            <div class="thumb-wrap">
+                                <img class="project-thumb" 
+                                     src="chocolate-ad.png" 
+                                     alt="Chocolate & Fruit Series"
+                                     style="object-position: center center;">
+                                <div class="play-overlay">
+                                    <button class="play-btn" 
+                                            data-video="chocolates_ad.mp4" 
+                                            data-poster="chocolate-ad.png"
+                                            aria-label="Play Chocolate Ad">
+                                        <svg class="play-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8 5v14l11-7z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-info">
+                                <h3>Chocolate & Fruit Series</h3>
+                                <p>Bright, appetizing edits with playful type and quick cuts for multiple product variations and social placements.</p>
+                                <div class="project-tags">
+                                    <span class="tag">Food</span>
+                                    <span class="tag">Variations</span>
+                                    <span class="tag">16:9</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="contact-content">
+                <div class="contact-glow"></div>
+                <h2>Want a high-performing ad for your brand?</h2>
+                <p>Let's create something amazing together</p>
+                <a class="hire-btn" href="mailto:celestialdraco6@gmail.com">
+                    <span>Hire Me</span>
+                    <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12h14m-7-7l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="video-modal" role="dialog" aria-hidden="true" aria-label="Project video player">
+        <div class="video-modal-backdrop"></div>
+        <div class="video-modal-content">
+            <button class="video-modal-close" aria-label="Close video">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            <video id="modalVideo" controls playsinline preload="metadata">
+                <source id="modalSource" src="" type="video/mp4">
+                Your browser does not support HTML5 video.
+            </video>
+        </div>
     </div>
-  </section>
 
-  <section class="contact-section">
-    <h2>Want a high-performing ad for your brand?</h2>
-    <p>Let's create something amazing together</p>
-    <a class="hire-btn" href="mailto:celestialdraco6@gmail.com">Hire Me</a>
-  </section>
-</main>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Luna Essence · Portfolio by Pragati Pandey · <a href="mailto:celestialdraco6@gmail.com">celestialdraco6@gmail.com</a> · <a href="https://www.linkedin.com/in/pragati-pandey-0b9a301a8/" target="_blank" rel="noopener">LinkedIn</a></p>
+        </div>
+    </footer>
 
-<div id="videoModal" class="video-modal" role="dialog" aria-hidden="true" aria-label="Project video player">
-  <div class="video-modal-backdrop" data-close-modal></div>
-  <div class="video-modal-content">
-    <button class="video-modal-close" aria-label="Close video" data-close-modal>&times;</button>
-    <video id="modalVideo" controls playsinline preload="metadata" poster="" tabindex="0">
-      <source id="modalSource" src="" type="video/mp4" />
-      Your browser does not support HTML5 video.
-    </video>
-  </div>
-</div>
-
-<footer>
-  <div class="container">
-    <p>Luna Essence Portfolio by Pragati Pandey <a href="mailto:celestialdraco6@gmail.com">celestialdraco6@gmail.com</a> <a href="https://www.linkedin.com/in/pragati-pandey-0b9a301a8" target="_blank" rel="noopener">LinkedIn</a></p>
-  </div>
-</footer>
-
-<script src="script.js"></script>
+    <!-- Scripts -->
+    <script src="scripts.js"></script>
 </body>
 </html>
