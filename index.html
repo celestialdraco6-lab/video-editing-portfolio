@@ -1,409 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Luna Essence — Video Editing Portfolio</title>
-
-    <!-- Preload critical fonts for faster rendering -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        * { margin:0; padding:0; box-sizing:border-box; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
-        :root{
-            --primary:#667eea; --secondary:#764ba2; --bg-light:#fafafa; --bg-dark:#111015;
-            --text-light:#2d3748; --text-dark:#ffffff; --muted:#718096;
-            --card-light:#ffffff; --card-dark:#1f2430; --shadow: 0 14px 40px rgba(20,20,30,0.08);
-        }
-        body{ font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; line-height:1.6; background:var(--bg-light); color:var(--text-light); transition:background .25s,color .25s; padding-bottom:60px; }
-        body.dark-theme{ background:var(--bg-dark); color:var(--text-dark); }
-        h1,h2,h3{ font-family: Georgia, serif; }
-        .container{ max-width:1200px; margin:0 auto; padding:0 20px; }
-
-        /* Header */
-        header{ padding:18px 0; position:sticky; top:6px; background:transparent; z-index:1000; }
-        nav{ display:flex; justify-content:space-between; align-items:center; gap:12px; }
-        .logo-container{ display:flex; align-items:center; gap:12px; }
-        .logo-img{ width:46px; height:46px; border-radius:10px; }
-        .logo-text{ font-size:20px; font-weight:700; letter-spacing:-0.4px; color:var(--primary); }
-        .theme-toggle{ background:transparent; border:2px solid var(--primary); color:var(--primary); padding:8px 18px; border-radius:999px; cursor:pointer; font-weight:600; }
-        .theme-toggle:hover{ background:var(--primary); color:#fff; transform:translateY(-2px); }
-
-        /* Hero */
-        .hero{ background:linear-gradient(135deg,var(--primary),var(--secondary)); padding:72px 0 44px; text-align:center; margin-bottom:40px; border-radius:20px; margin: 20px; }
-        .hero-content{ background:transparent; padding:28px 20px; border-radius:16px; max-width:940px; margin:0 auto; color:rgba(255,255,255,0.95); }
-        .hero h1{ font-size:42px; margin-bottom:10px; font-weight:700; color:#fff; }
-        .hero p{ font-size:18px; opacity:0.95; }
-
-        section{ margin:48px 0; }
-        .section-title{ font-size:32px; text-align:center; margin-bottom:28px; }
-        .section-title::after{ content:''; display:block; width:70px; height:4px; background:linear-gradient(90deg,var(--primary),var(--secondary)); margin:14px auto 0; border-radius:2px; }
-
-        /* About */
-        .about-card{ background:var(--card-light); padding:28px; border-radius:16px; box-shadow:var(--shadow); max-width:900px; margin:0 auto; }
-        body.dark-theme .about-card{ background:#161722; color:var(--text-dark); }
-        .about-card h3{ font-size:22px; margin-bottom:10px; color:var(--primary); }
-        .about-card p{ font-size:15px; color:var(--muted); line-height:1.7; }
-
-        /* Skills */
-        .skills-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px; max-width:1000px; margin:0 auto; }
-        .skill-chip{ background:var(--card-light); padding:16px 20px; border-radius:12px; text-align:center; font-weight:600; font-size:14px; box-shadow:0 8px 24px rgba(20,20,30,0.06); opacity:0; transform:translateY(12px); animation:fadeInUp .5s ease forwards; }
-        .skill-chip:nth-child(1){animation-delay:.06s}.skill-chip:nth-child(2){animation-delay:.12s}.skill-chip:nth-child(3){animation-delay:.18s}
-        @keyframes fadeInUp{to{opacity:1; transform:none;}}
-
-        /* Projects grid + card */
-        .projects-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; align-items:start; }
-        .project-card{ background:linear-gradient(180deg, rgba(255,255,255,1), rgba(250,250,255,1)); border-radius:16px; overflow:hidden; box-shadow:0 12px 34px rgba(30,30,60,0.06); transition:transform .22s ease, box-shadow .22s ease; display:flex; flex-direction:column; }
-        body.dark-theme .project-card{ background:#14151a; box-shadow:0 12px 34px rgba(0,0,0,0.6); }
-        .project-card:hover{ transform:translateY(-6px); box-shadow:0 18px 44px rgba(30,30,60,0.1); }
-
-        /* Thumbnail area: vertical-first */
-        .thumb-wrap{ position:relative; background:#f3f4f6; }
-        .project-thumb{ width:100%; height:0; padding-bottom:177.77%; /* 9:16 => 16/9? For vertical use 177.77% (16:9 -> 56.25%); 9:16 -> 177.77% */ 
-            display:block; object-fit:cover; object-position:center center; border:0; }
-        /* Each card can tweak focus via parent class */
-        .project-card.serum .project-thumb{ object-position:center 24%; }     /* serum: focus upper area */
-        .project-card.lipstick .project-thumb{ object-position:center 40%; }  /* lipstick: mid focus */
-        .project-card.perfume .project-thumb{ object-position:center 48%; }   /* perfume: lower focus */
-
-        /* Play overlay */
-        .play-overlay{
-            position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none;
-            background:linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.18));
-            transition:background .18s ease;
-        }
-        .thumb-wrap:hover .play-overlay{ background:linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.28)); }
-        .play-btn{
-            pointer-events:auto;
-            display:inline-grid; place-items:center; width:68px; height:68px; border-radius:999px;
-            background:rgba(255,255,255,0.95); box-shadow:0 6px 20px rgba(30,30,60,0.12); border:none; cursor:pointer;
-            transform:scale(1); transition:transform .14s ease;
-        }
-        .play-btn:active{ transform:scale(.98); }
-        .play-icon{ width:24px; height:24px; display:block; margin-left:4px; fill:var(--primary); }
-
-        /* Project info */
-        .project-info{ padding:18px 16px 20px; display:flex; flex-direction:column; gap:8px; flex:1; }
-        .project-info h3{ font-size:18px; margin:0; color:var(--primary); }
-        .project-info p{ margin:0; color:var(--muted); font-size:14px; line-height:1.5; }
-        .project-tags{ margin-top:auto; display:flex; gap:8px; flex-wrap:wrap; }
-        .tag{ background:rgba(102,126,234,0.08); color:var(--primary); padding:6px 10px; border-radius:999px; font-size:12px; font-weight:600; }
-
-        /* Contact banner (styled to match screenshot) */
-        .contact-section{ text-align:center; padding:60px 30px; border-radius:30px; color:#fff; background:linear-gradient(90deg,var(--primary),var(--secondary)); margin:22px; box-shadow: 0 28px 80px rgba(102,76,170,0.16); }
-        .contact-section h2{ font-size:28px; margin-bottom:12px; font-weight:700; color:#fff; }
-        .contact-section p{ margin-bottom:20px; color:rgba(255,255,255,0.95); }
-        .hire-btn{ display:inline-block; background:#fff; color:var(--primary); padding:16px 44px; border-radius:999px; font-weight:800; text-decoration:none; box-shadow:0 18px 46px rgba(0,0,0,0.12); transition:transform .12s ease; }
-        .hire-btn:hover{ transform:translateY(-4px); }
-
-        /* Modal for videos (orientation aware) */
-        .video-modal{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:3000; padding:20px; }
-        .video-modal.active{ display:flex; }
-        .video-modal-backdrop{ position:absolute; inset:0; background:rgba(0,0,0,0.7); }
-        .video-modal-content{ position:relative; z-index:3001; display:flex; align-items:center; justify-content:center; max-width:960px; width:100%; }
-        .video-modal-content video{ width:auto; height:auto; max-height:92vh; max-width:92vw; border-radius:12px; background:#000; box-shadow:0 30px 90px rgba(0,0,0,0.6); }
-        .video-modal-content.vertical video{ max-width:64vh; } /* tall reels: width controlled by viewport height */
-        .video-modal-close{ position:absolute; top:-26px; right:-26px; background:rgba(255,255,255,0.96); border:none; width:52px; height:52px; border-radius:999px; box-shadow:0 10px 30px rgba(20,20,40,0.12); cursor:pointer; font-size:20px; }
-        .video-modal-close:focus{ outline:3px solid rgba(102,126,234,0.25); }
-
-        footer{ text-align:center; padding:28px 0; color:var(--muted); font-size:13px; margin-top:20px; }
-        footer a{ color:var(--primary); text-decoration:none; }
-
-        @media (max-width:900px){
-            .hero{ padding:48px 0; margin:18px; }
-            .hero h1{ font-size:30px; }
-            .project-info{ padding:14px; }
-            .project-info h3{ font-size:16px; }
-            .project-thumb{ padding-bottom:170%; } /* keep tall on mobile */
-        }
-        @media (max-width:520px){
-            .projects-grid{ gap:14px; grid-template-columns:1fr; }
-            .play-btn{ width:56px; height:56px; }
-            .play-icon{ width:18px; height:18px; }
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Luna Essence Video Editing Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
-        <nav class="container" aria-label="Main navigation">
-            <div class="logo-container">
-                <img class="logo-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='moonGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23b8a5c2'/%3E%3Cstop offset='100%25' style='stop-color:%23a08ba8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='100' cy='100' r='80' fill='url(%23moonGrad)'/%3E%3Cpath d='M70 80 Q75 60 85 55 Q95 50 100 55 Q105 60 103 70 L100 90 Q98 100 95 105 Q90 115 80 115 Q70 115 65 105 Q60 95 60 85 Z' fill='%232d3748'/%3E%3C/svg%3E" alt="Luna Essence Logo">
-                <span class="logo-text">Luna Essence</span>
-            </div>
-            <div>
-                <button class="theme-toggle" onclick="toggleTheme()" aria-pressed="false">Switch Theme</button>
-            </div>
-        </nav>
-    </header>
-
-    <main class="container" role="main">
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Video Editing Portfolio</h1>
-                <p>High-converting short-form ads & product visuals</p>
-            </div>
-        </section>
-
-        <section class="fade-in">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-card">
-                <h3>About Me</h3>
-                <p>I create modern, high-converting short-form product ads with strong hooks, clean transitions, typography overlays, and fast-paced storytelling. I specialize in reels, Meta ads, and performance-focused video variations.</p>
-            </div>
-        </section>
-
-        <section class="fade-in">
-            <h2 class="section-title">Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-chip">Short-form Editing</div>
-                <div class="skill-chip">Product Ads</div>
-                <div class="skill-chip">Transitions & Hooks</div>
-                <div class="skill-chip">Color Correction</div>
-                <div class="skill-chip">Text Animations</div>
-                <div class="skill-chip">Meta Ads Optimization</div>
-                <div class="skill-chip">Motion Graphics (Basic)</div>
-            </div>
-        </section>
-
-        <section class="fade-in">
-            <h2 class="section-title">Projects</h2>
-            <div class="projects-grid">
-
-                <!-- Perfume Ad (per-card tuning) -->
-                <article class="project-card perfume">
-                    <div class="thumb-wrap">
-                        <img class="project-thumb" src="perfume-ad.png" alt="Luxury Perfume Ad">
-                        <div class="play-overlay">
-                            <button class="play-btn video-thumb-btn" data-video="perfume_ad.mp4" data-poster="perfume-ad.png" aria-controls="videoModal" aria-label="Play Luxury Perfume Ad">
-                                <svg class="play-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 2.7v18.6L20 12 4 2.7z"/></svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Luxury Perfume Ad</h3>
-                        <p>Elegant short-form ad with soft-focus product shots, slow-mo reveals, and premium typography to communicate mood and craft.</p>
-                        <div class="project-tags">
-                            <span class="tag">Product Ad</span>
-                            <span class="tag">Luxury</span>
-                            <span class="tag">Short-form</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Moisturizer Ad -->
-                <article class="project-card">
-                    <div class="thumb-wrap">
-                        <img class="project-thumb" src="moisturizer-ad.png" alt="Moisturizer Product Ad">
-                        <div class="play-overlay">
-                            <button class="play-btn video-thumb-btn" data-video="moisturizer_ad.mp4" data-poster="moisturizer-ad.png" aria-controls="videoModal" aria-label="Play Moisturizer Ad">
-                                <svg class="play-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 2.7v18.6L20 12 4 2.7z"/></svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Moisturizer Product Ad</h3>
-                        <p>Clean beauty reel with benefit-led overlays, soft color grade and readable captions optimized for conversion.</p>
-                        <div class="project-tags">
-                            <span class="tag">Beauty</span>
-                            <span class="tag">Meta Ad</span>
-                            <span class="tag">Product Demo</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Chocolate Ad -->
-                <article class="project-card">
-                    <div class="thumb-wrap">
-                        <img class="project-thumb" src="chocolate-ad.png" alt="Chocolate & Fruit Series">
-                        <div class="play-overlay">
-                            <button class="play-btn video-thumb-btn" data-video="chocolates_ad.mp4" data-poster="chocolate-ad.png" aria-controls="videoModal" aria-label="Play Chocolate Ad">
-                                <svg class="play-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 2.7v18.6L20 12 4 2.7z"/></svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Chocolate & Fruit Series</h3>
-                        <p>Bright, appetizing edits with playful type and quick cuts for multiple product variations and social placements.</p>
-                        <div class="project-tags">
-                            <span class="tag">Food</span>
-                            <span class="tag">Variations</span>
-                            <span class="tag">Social</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Serum Ad (important: reel) -->
-                <article class="project-card serum">
-                    <div class="thumb-wrap">
-                        <img class="project-thumb" src="serum_ad.jpg" alt="Serum Glow Ad">
-                        <div class="play-overlay">
-                            <button class="play-btn video-thumb-btn" data-video="serum_ad_lite.mp4" data-poster="serum_ad.jpg" aria-controls="videoModal" aria-label="Play Serum Ad">
-                                <svg class="play-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 2.7v18.6L20 12 4 2.7z"/></svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Serum Glow Ad</h3>
-                        <p>Calm cinematic skincare spot focusing on bottle hero shots, glow transitions, and a benefit-led script that converts.</p>
-                        <div class="project-tags">
-                            <span class="tag">Skincare</span>
-                            <span class="tag">Cinematic</span>
-                            <span class="tag">Vertical</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Lipstick Ad -->
-                <article class="project-card lipstick">
-                    <div class="thumb-wrap">
-                        <img class="project-thumb" src="LIPSTICK_ad.jpg" alt="Lipstick Launch Ad">
-                        <div class="play-overlay">
-                            <button class="play-btn video-thumb-btn" data-video="lipstick_ad.mp4" data-poster="LIPSTICK_ad.jpg" aria-controls="videoModal" aria-label="Play Lipstick Ad">
-                                <svg class="play-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 2.7v18.6L20 12 4 2.7z"/></svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <h3>Lipstick Launch Ad</h3>
-                        <p>High-impact lipstick promo with macro product shots, powder bursts and bold color reveals built for social traction.</p>
-                        <div class="project-tags">
-                            <span class="tag">Beauty</span>
-                            <span class="tag">Launch</span>
-                            <span class="tag">Macro</span>
-                        </div>
-                    </div>
-                </article>
-
-            </div>
-        </section>
-
-        <section>
-            <div class="contact-section">
-                <h2>Want a high-performing ad for your brand?</h2>
-                <p>Let's create something amazing together</p>
-                <a class="hire-btn" href="mailto:celestialdraco6@gmail.com">Hire Me</a>
-            </div>
-        </section>
-    </main>
-
-    <!-- Video Modal -->
-    <div id="videoModal" class="video-modal" role="dialog" aria-hidden="true" aria-label="Project video player">
-        <div class="video-modal-backdrop" data-close-modal></div>
-        <div class="video-modal-content" role="document">
-            <button class="video-modal-close" aria-label="Close video" data-close-modal>&times;</button>
-            <video id="modalVideo" controls playsinline preload="metadata" poster="">
-                <source id="modalSource" src="" type="video/mp4">
-                Your browser does not support HTML5 video.
-            </video>
-        </div>
+<header>
+  <nav class="container" aria-label="Main navigation">
+    <div class="logo-container">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='moonGrad' x1='0.25' y1='0.25' x2='1' y2='1'%3E%3Cstop offset='0%' stop-color='%2323b8a5c2' /%3E%3Cstop offset='100%' stop-color='%233a08ba83' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='100' cy='100' r='80' fill='url(%23moonGrad)'/%3E%3Cpath d='M70 80 Q75 60 85 55 Q95 50 100 55 Q105 60 103 70 L100 90 Q98 100 95 105 Q90 115 80 115 Q70 115 65 105 Q60 95 60 85 Z' fill='%23232d3748'/%3E%3C/svg%3E" alt="Luna Essence Logo" class="logo-img" />
+      <span class="logo-text">Luna Essence</span>
     </div>
+    <button class="theme-toggle" aria-pressed="false" aria-label="Switch Theme">Switch Theme</button>
+  </nav>
+</header>
 
-    <footer>
-        <div class="container">
-            <p>Luna Essence · Portfolio by Pragati Pandey · <a href="mailto:celestialdraco6@gmail.com">celestialdraco6@gmail.com</a> · <a href="https://www.linkedin.com/in/pragati-pandey-0b9a301a8/" target="_blank" rel="noopener">LinkedIn</a></p>
+<main class="container" role="main">
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Video Editing Portfolio</h1>
+      <p>High-converting short-form ads product visuals</p>
+    </div>
+  </section>
+
+  <section class="about section fade-in">
+    <h2 class="section-title">About Me</h2>
+    <div class="about-card">
+      <h3>About Me</h3>
+      <p>I create modern, high-converting short-form product ads with strong hooks, clean transitions, typography overlays, and fast-paced storytelling. I specialize in reels, Meta ads, and performance-focused video variations.</p>
+    </div>
+  </section>
+
+  <section class="skills section fade-in">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-chip">Short-form Editing</div>
+      <div class="skill-chip">Product Ads</div>
+      <div class="skill-chip">Transitions & Hooks</div>
+      <div class="skill-chip">Color Correction</div>
+      <div class="skill-chip">Text Animations</div>
+      <div class="skill-chip">Meta Ads Optimization</div>
+      <div class="skill-chip">Motion Graphics Basic</div>
+    </div>
+  </section>
+
+  <section class="projects section fade-in">
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+      
+      <!-- Example Project Card. Repeat for each project -->
+      <article class="project-card vertical" data-orientation="vertical">
+        <div class="thumb-wrap">
+          <img src="LIPSTICKad.jpg" alt="Lipstick Launch Ad" class="project-thumb" />
+          <div class="play-overlay">
+            <button class="play-btn video-thumb-btn" data-video="videolipstickad.mp4" data-poster="LIPSTICKad.jpg" aria-controls="videoModal" aria-label="Play Lipstick Launch Ad">
+              <svg class="play-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 2.7v18.6L20 12 4 2.7z" />
+              </svg>
+            </button>
+          </div>
         </div>
-    </footer>
+        <div class="project-info">
+          <h3>Lipstick Launch Ad</h3>
+          <p>High-impact lipstick promo with macro product shots, powder bursts and bold color reveals built for social traction.</p>
+          <div class="project-tags">
+            <span class="tag">Beauty</span>
+            <span class="tag">Launch</span>
+            <span class="tag">Macro</span>
+          </div>
+        </div>
+      </article>
 
-    <script>
-        // Theme toggle
-        function toggleTheme(){
-            const isDark = document.body.classList.toggle('dark-theme');
-            localStorage.setItem('luna-theme', isDark ? 'dark' : 'light');
-            document.querySelector('.theme-toggle').setAttribute('aria-pressed', isDark ? 'true' : 'false');
-        }
-        if(localStorage.getItem('luna-theme') === 'dark'){
-            document.body.classList.add('dark-theme');
-            document.querySelector('.theme-toggle').setAttribute('aria-pressed', 'true');
-        }
+      <!-- Add your other projects similarly with either class="vertical" or class="horizontal" 
+           and updated src and data-poster/video attributes -->
 
-        // Reveal on scroll (simple)
-        const observer = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.08 });
-        document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+    </div>
+  </section>
 
-        // Modal video logic (orientation-aware + poster + focus management)
-        const modal = document.getElementById('videoModal');
-        const modalContent = modal.querySelector('.video-modal-content');
-        const modalVideo = document.getElementById('modalVideo');
-        const modalSource = document.getElementById('modalSource');
-        let lastFocusedTrigger = null;
+  <section class="contact-section">
+    <h2>Want a high-performing ad for your brand?</h2>
+    <p>Let's create something amazing together</p>
+    <a class="hire-btn" href="mailto:celestialdraco6@gmail.com">Hire Me</a>
+  </section>
+</main>
 
-        // Attach to all play buttons (.video-thumb-btn are inside play buttons)
-        document.querySelectorAll('.video-thumb-btn').forEach(btn => {
-            btn.addEventListener('click', async (e) => {
-                lastFocusedTrigger = btn;
-                const src = btn.getAttribute('data-video');
-                const poster = btn.getAttribute('data-poster') || (btn.closest('.thumb-wrap')?.querySelector('img')?.src || '');
-                // set source + poster then open modal
-                modalSource.src = src;
-                modalVideo.poster = poster;
-                modal.classList.add('active');
-                modal.setAttribute('aria-hidden','false');
-                document.body.style.overflow = 'hidden';
+<div id="videoModal" class="video-modal" role="dialog" aria-hidden="true" aria-label="Project video player">
+  <div class="video-modal-backdrop" data-close-modal></div>
+  <div class="video-modal-content">
+    <button class="video-modal-close" aria-label="Close video" data-close-modal>&times;</button>
+    <video id="modalVideo" controls playsinline preload="metadata" poster="" tabindex="0">
+      <source id="modalSource" src="" type="video/mp4" />
+      Your browser does not support HTML5 video.
+    </video>
+  </div>
+</div>
 
-                // reset classes
-                modalContent.classList.remove('vertical','horizontal');
+<footer>
+  <div class="container">
+    <p>Luna Essence Portfolio by Pragati Pandey <a href="mailto:celestialdraco6@gmail.com">celestialdraco6@gmail.com</a> <a href="https://www.linkedin.com/in/pragati-pandey-0b9a301a8" target="_blank" rel="noopener">LinkedIn</a></p>
+  </div>
+</footer>
 
-                // try to load metadata to know orientation
-                try {
-                    await modalVideo.load();
-                    await new Promise((resolve) => {
-                        const tm = setTimeout(resolve, 800);
-                        modalVideo.addEventListener('loadedmetadata', function onMeta(){
-                            modalVideo.removeEventListener('loadedmetadata', onMeta);
-                            clearTimeout(tm);
-                            resolve();
-                        });
-                    });
-                } catch (err) { /* ignore */ }
-
-                // orientation detection
-                const isVertical = (modalVideo.videoHeight && modalVideo.videoWidth) ? (modalVideo.videoHeight > modalVideo.videoWidth) : (poster && poster.match(/(serum|LIPSTICK|perfume)/i));
-                if (isVertical) modalContent.classList.add('vertical'); else modalContent.classList.add('horizontal');
-
-                // focus close button for accessibility
-                const closeBtn = modal.querySelector('.video-modal-close');
-                if (closeBtn) closeBtn.focus();
-
-                // Attempt muted autoplay for reliability
-                try {
-                    modalVideo.muted = true;
-                    await modalVideo.play();
-                } catch (err) {
-                    modalVideo.muted = false; // allow user to play
-                }
-            });
-        });
-
-        function closeVideoModal(){
-            if (!modal.classList.contains('active')) return;
-            modal.classList.remove('active');
-            modal.setAttribute('aria-hidden','true');
-            try { modalVideo.pause(); } catch(e){}
-            modalVideo.currentTime = 0;
-            modalSource.src = '';
-            modalVideo.load();
-            document.body.style.overflow = '';
-            if (lastFocusedTrigger && typeof lastFocusedTrigger.focus === 'function') lastFocusedTrigger.focus();
-            lastFocusedTrigger = null;
-        }
-
-        // close when clicking backdrop or close button
-        modal.addEventListener('click', (e) => {
-            if (e.target.hasAttribute('data-close-modal') || e.target === modal){
-                closeVideoModal();
-            }
-        });
-
-        // Escape key to close
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('active')) closeVideoModal();
-        });
-
-        // Pause video when page hides
-        window.addEventListener('pagehide', () => { try { modalVideo.pause(); } catch(e){} });
-    </script>
+<script src="script.js"></script>
 </body>
 </html>
