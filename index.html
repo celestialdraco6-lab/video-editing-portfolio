@@ -4,13 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Luna Essence — Video Editing Portfolio</title>
-    
+
     <!-- Preload critical fonts for faster rendering -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
         :root{
@@ -45,7 +45,7 @@
         body.dark-theme .about-card p{ color:#cbd5e0; }
 
         .skills-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:24px; max-width:1000px; margin:0 auto; min-height:200px; }
-        .skill-chip{ background:var(--card-light); padding:24px 32px; border-radius:16px; text-align:center; font-weight:600; font-size:16px; box-shadow:0 6px 20px var(--shadow-light); 
+        .skill-chip{ background:var(--card-light); padding:24px 32px; border-radius:16px; text-align:center; font-weight:600; font-size:16px; box-shadow:0 6px 20px var(--shadow-light);
                      transition:transform .2s ease,box-shadow .2s ease,background .2s ease; cursor:pointer; will-change:transform;
                      opacity:0; transform:translateY(20px); animation:fadeInUp .4s ease forwards; }
         .skill-chip:nth-child(1){animation-delay:.05s}.skill-chip:nth-child(2){animation-delay:.1s}
@@ -53,39 +53,33 @@
         .skill-chip:nth-child(5){animation-delay:.25s}.skill-chip:nth-child(6){animation-delay:.3s}
         .skill-chip:nth-child(7){animation-delay:.35s}
         @keyframes fadeInUp{to{opacity:1;transform:translateY(0)}}
-        body.dark-theme .skill-chip{ background:rgba(102,126,234,.12); color:#e2e8f0; 
+        body.dark-theme .skill-chip{ background:rgba(102,126,234,.12); color:#e2e8f0;
             box-shadow:0 6px 20px rgba(0,0,0,.3),0 0 0 1px rgba(102,126,234,.2); }
-        .skill-chip:hover{ transform:translateY(-4px) scale(1.02); 
+        .skill-chip:hover{ transform:translateY(-4px) scale(1.02);
             box-shadow:0 12px 32px var(--shadow-light),0 0 24px rgba(102,126,234,.4); }
         body.dark-theme .skill-chip:hover{ background:rgba(102,126,234,.18);
             box-shadow:0 12px 32px rgba(0,0,0,.5),0 0 32px rgba(102,126,234,.5); }
 
-        .projects-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(450px,1fr)); gap:40px; }
-        .project-card{ background:var(--card-light); border-radius:20px; overflow:hidden; box-shadow:0 10px 30px var(--shadow-light); 
+        /* Responsive projects grid tweak */
+        .projects-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:32px; }
+        .project-card{ background:var(--card-light); border-radius:20px; overflow:hidden; box-shadow:0 10px 30px var(--shadow-light);
                        transition:transform .3s,box-shadow .3s; will-change:transform; }
         body.dark-theme .project-card{ background:var(--card-dark); box-shadow:0 10px 30px var(--shadow-dark); }
-        .project-card:hover{ transform:translateY(-8px); 
+        .project-card:hover{ transform:translateY(-8px);
             box-shadow:0 16px 48px var(--shadow-light),0 0 24px rgba(118,75,162,.3); }
-        body.dark-theme .project-card:hover{ box-shadow:0 16px 48px rgba(0,0,0,.6),0 0 32px rgba(118118,75,162,.4); }
+        body.dark-theme .project-card:hover{ box-shadow:0 16px 48px rgba(0,0,0,.6),0 0 32px rgba(118,75,162,.4); }
 
-        .video-container{ position:relative; width:100%; background:#000; overflow:hidden; aspect-ratio:16/9; transition:aspect-ratio .3s ease; }
-        .video-container.vertical{ aspect-ratio:9/16; }
-        .video-container.vertical video{ object-fit:cover; }
-        .video-container.landscape{ aspect-ratio:16/9; }
-        .video-container.landscape video{ object-fit:contain; background:#000; }
-        .video-container video{ position:absolute; inset:0; width:100%; height:100%; border:0; display:block; }
-
-        .project-info{ padding:32px; }
-        .project-info h3{ font-size:24px; margin-bottom:12px; color:var(--primary); }
-        .project-info p{ font-size:16px; color:var(--text-muted-light); margin-bottom:16px; line-height:1.7; }
+        .project-info{ padding:24px; }
+        .project-info h3{ font-size:22px; margin-bottom:12px; color:var(--primary); }
+        .project-info p{ font-size:15px; color:var(--text-muted-light); margin-bottom:12px; line-height:1.6; }
         body.dark-theme .project-info p{ color:#cbd5e0; }
         .project-tags{ display:flex; flex-wrap:wrap; gap:8px; }
         .tag{ background:rgba(102,126,234,.1); color:var(--primary); padding:6px 14px; border-radius:20px; font-size:13px; font-weight:500; }
 
         .contact-section{ text-align:center; background:linear-gradient(135deg,var(--primary),var(--secondary)); padding:80px 40px; border-radius:24px; color:#fff; }
-        .hire-btn{ display:inline-block; background:#fff; color:var(--primary); padding:18px 48px; border-radius:50px; font-weight:700; font-size:18px; text-decoration:none; 
+        .hire-btn{ display:inline-block; background:#fff; color:var(--primary); padding:18px 48px; border-radius:50px; font-weight:700; font-size:18px; text-decoration:none;
                    box-shadow:0 10px 30px rgba(0,0,0,.2); transition:transform .2s ease,box-shadow .2s ease; will-change:transform; }
-        .hire-btn:hover{ transform:translateY(-3px) scale(1.03); 
+        .hire-btn:hover{ transform:translateY(-3px) scale(1.03);
             box-shadow:0 14px 36px rgba(0,0,0,.3),0 0 24px rgba(255,255,255,.4); }
 
         .theme-toggle:hover{ transform:translateY(-2px) scale(1.05); box-shadow:0 8px 20px rgba(102,126,234,.4); }
@@ -97,10 +91,83 @@
 
         @media (max-width:768px){
             .projects-grid{ grid-template-columns:1fr; }
-            .video-container{ aspect-ratio:9/16; }
         }
         .fade-in{ opacity:0; transform:translateY(30px); transition:opacity .6s, transform .6s; }
         .fade-in.visible{ opacity:1; transform:none; }
+
+        /* Thumbnails + modal */
+        .project-thumb{
+            width:100%;
+            display:block;
+            border:0;
+            object-fit:cover;
+            aspect-ratio:16/9;
+        }
+        .video-thumb-btn{
+            border:none;
+            padding:0;
+            margin:0;
+            background:transparent;
+            width:100%;
+            cursor:pointer;
+            display:block;
+        }
+        .video-thumb-btn:focus{
+            outline:3px solid var(--primary);
+            outline-offset:3px;
+            border-radius:18px;
+        }
+        .video-modal{
+            position:fixed;
+            inset:0;
+            display:none;
+            align-items:center;
+            justify-content:center;
+            z-index:2000;
+        }
+        .video-modal.active{
+            display:flex;
+        }
+        .video-modal-backdrop{
+            position:absolute;
+            inset:0;
+            background:rgba(0,0,0,0.65);
+        }
+        .video-modal-content{
+            position:relative;
+            background:#000;
+            border-radius:24px;
+            max-width:900px;
+            width:90%;
+            box-shadow:0 20px 60px rgba(0,0,0,.7);
+            overflow:hidden;
+        }
+        .video-modal-content video{
+            display:block;
+            width:100%;
+            height:auto;
+        }
+        .video-modal-close{
+            position:absolute;
+            top:10px;
+            right:14px;
+            border:none;
+            background:rgba(255,255,255,0.12);
+            color:#fff;
+            font-size:28px;
+            line-height:1;
+            width:40px;
+            height:40px;
+            border-radius:999px;
+            cursor:pointer;
+            backdrop-filter:blur(6px);
+        }
+        .video-modal-close:hover{
+            background:rgba(255,255,255,0.24);
+        }
+        body.dark-theme .video-modal-content{
+            background:#000;
+        }
     </style>
 </head>
 <body>
@@ -110,7 +177,7 @@
                 <img class="logo-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='moonGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23b8a5c2'/%3E%3Cstop offset='100%25' style='stop-color:%23a08ba8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='100' cy='100' r='80' fill='url(%23moonGrad)'/%3E%3Cpath d='M70 80 Q75 60 85 55 Q95 50 100 55 Q105 60 103 70 L100 90 Q98 100 95 105 Q90 115 80 115 Q70 115 65 105 Q60 95 60 85 Z' fill='%232d3748'/%3E%3C/svg%3E" alt="Luna Essence Logo">
                 <span class="logo-text">Luna Essence</span>
             </div>
-            <button class="theme-toggle" onclick="toggleTheme()">Switch Theme</button>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-pressed="false">Switch Theme</button>
         </nav>
     </header>
     <main>
@@ -142,47 +209,89 @@
         <section class="container fade-in">
             <h2 class="section-title">Projects</h2>
             <div class="projects-grid">
+                <!-- Perfume Ad -->
                 <div class="project-card">
-                    <div class="video-container">
-                        <video playsinline preload="metadata" controls poster="perfume-ad.png">
-                            <source src="perfume_ad.mp4" type="video/mp4">
-                            Your browser does not support HTML5 video. <a href="perfume_ad.mp4">Download</a>
-                        </video>
-                    </div>
+                    <button class="video-thumb-btn" data-video="perfume_ad.mp4" aria-controls="videoModal">
+                        <img src="perfume-ad.png" alt="Luxury Perfume Ad" class="project-thumb">
+                    </button>
                     <div class="project-info">
                         <h3>Luxury Perfume Ad</h3>
                         <p>Elegant short-form ad using soft-focus product shots, slow-mo reveals and premium typography to capture fragrance mood.</p>
-                        <div class="project-tags"><span class="tag">Product Ad</span><span class="tag">Luxury</span><span class="tag">Vertical/Short-form</span></div>
+                        <div class="project-tags">
+                            <span class="tag">Product Ad</span>
+                            <span class="tag">Luxury</span>
+                            <span class="tag">Vertical/Short-form</span>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Moisturizer Ad -->
                 <div class="project-card">
-                    <div class="video-container">
-                        <video playsinline preload="metadata" controls poster="moisturizer-ad.png">
-                            <source src="moisturizer_ad.mp4" type="video/mp4">
-                            Your browser does not support HTML5 video. <a href="moisturizer_ad.mp4">Download</a>
-                        </video>
-                    </div>
+                    <button class="video-thumb-btn" data-video="moisturizer_ad.mp4" aria-controls="videoModal">
+                        <img src="moisturizer-ad.png" alt="Moisturizer Product Ad" class="project-thumb">
+                    </button>
                     <div class="project-info">
                         <h3>Moisturizer Product Ad</h3>
-                        <p>Clean beauty reel with benefit-led overlays (hydration, lightweight feel), soft color grade and readable captions for social performance.</p>
-                        <div class="project-tags"><span class="tag">Beauty</span><span class="tag">Meta Ad</span><span class="tag">Product Demo</span></div>
+                        <p>Clean beauty reel with benefit-led overlays, soft color grade and readable captions for social performance.</p>
+                        <div class="project-tags">
+                            <span class="tag">Beauty</span>
+                            <span class="tag">Meta Ad</span>
+                            <span class="tag">Product Demo</span>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Chocolate Ad -->
                 <div class="project-card">
-                    <div class="video-container">
-                        <video playsinline preload="metadata" controls poster="chocolate-ad.png">
-                            <source src="chocolates_ad.mp4" type="video/mp4">
-                            Your browser does not support HTML5 video. <a href="chocolates_ad.mp4">Download</a>
-                        </video>
-                    </div>
+                    <button class="video-thumb-btn" data-video="chocolates_ad.mp4" aria-controls="videoModal">
+                        <img src="chocolate-ad.png" alt="Chocolate & Fruit Series" class="project-thumb">
+                    </button>
                     <div class="project-info">
                         <h3>Chocolate & Fruit Series</h3>
-                        <p>Bright, appetizing edits with close-ups, playful type and quick cuts for multiple product variations (strawberry, raspberry, blueberry).</p>
-                        <div class="project-tags"><span class="tag">Food & Beverage</span><span class="tag">Variations</span><span class="tag">Social</span></div>
+                        <p>Bright, appetizing edits with close-ups, playful type and quick cuts for multiple product variations.</p>
+                        <div class="project-tags">
+                            <span class="tag">Food & Beverage</span>
+                            <span class="tag">Variations</span>
+                            <span class="tag">Social</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Serum Ad -->
+                <div class="project-card">
+                    <button class="video-thumb-btn" data-video="serum_ad_lite.mp4" aria-controls="videoModal">
+                        <img src="serum_ad.jpg" alt="Serum Glow Ad" class="project-thumb">
+                    </button>
+                    <div class="project-info">
+                        <h3>Serum Glow Ad</h3>
+                        <p>Calm, cinematic skincare spot focusing on bottle hero shots, glow transitions and a clear benefit-led script.</p>
+                        <div class="project-tags">
+                            <span class="tag">Skincare</span>
+                            <span class="tag">Cinematic</span>
+                            <span class="tag">Vertical</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lipstick Ad -->
+                <div class="project-card">
+                    <button class="video-thumb-btn" data-video="lipstick_ad.mp4" aria-controls="videoModal">
+                        <img src="LIPSTICK_ad.jpg" alt="Lipstick Launch Ad" class="project-thumb">
+                    </button>
+                    <div class="project-info">
+                        <h3>Lipstick Launch Ad</h3>
+                        <p>High-impact lipstick promo with macro product shots, powder bursts and bold color reveals for social ads.</p>
+                        <div class="project-tags">
+                            <span class="tag">Beauty</span>
+                            <span class="tag">Product Launch</span>
+                            <span class="tag">Macro</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Contact -->
         <section class="container fade-in">
             <div class="contact-section">
                 <h2>Want a high-performing ad for your brand?</h2>
@@ -190,35 +299,105 @@
                 <a class="hire-btn" href="mailto:celestialdraco6@gmail.com">Hire Me</a>
             </div>
         </section>
+
+        <!-- Video Modal -->
+        <div id="videoModal" class="video-modal" role="dialog" aria-hidden="true" aria-label="Project video player">
+            <div class="video-modal-backdrop" data-close-modal></div>
+            <div class="video-modal-content" role="document">
+                <button class="video-modal-close" aria-label="Close video" data-close-modal>&times;</button>
+                <video id="modalVideo" controls playsinline preload="metadata" poster="">
+                    <source id="modalSource" src="" type="video/mp4">
+                    Your browser does not support HTML5 video.
+                </video>
+            </div>
+        </div>
     </main>
     <footer>
         <div class="container">
-            <p>Luna Essence · Portfolio by Pragati Pandey · <a href="mailto:celestialdraco6@gmail.com">celestialdraco6@gmail.com</a> · <a href="https://www.linkedin.com/in/pragati-pandey-0b9a301a8/" target="_blank">LinkedIn</a></p>
+            <p>Luna Essence · Portfolio by Pragati Pandey · <a href="mailto:celestialdraco6@gmail.com">celestialdraco6@gmail.com</a> · <a href="https://www.linkedin.com/in/pragati-pandey-0b9a301a8/" target="_blank" rel="noopener">LinkedIn</a></p>
         </div>
     </footer>
     <script>
-        function toggleTheme(){ document.body.classList.toggle('dark-theme'); localStorage.setItem('luna-theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light'); }
-        if(localStorage.getItem('luna-theme') === 'dark'){ document.body.classList.add('dark-theme'); }
-
-        function detectVideoAspectRatio(){
-            document.querySelectorAll('.video-container video').forEach(video=>{
-                const setClass = () => {
-                    const c = video.closest('.video-container');
-                    if(!c) return;
-                    const w = video.videoWidth || 1;
-                    const h = video.videoHeight || 1;
-                    const ratio = h / w;
-                    c.classList.remove('vertical','landscape');
-                    if(ratio > 1.4) c.classList.add('vertical'); else c.classList.add('landscape');
-                };
-                video.addEventListener('loadedmetadata', setClass);
-                if(video.readyState >= 1) setClass();
-            });
+        // Theme toggle
+        function toggleTheme(){
+            const isDark = document.body.classList.toggle('dark-theme');
+            localStorage.setItem('luna-theme', isDark ? 'dark' : 'light');
+            document.querySelector('.theme-toggle').setAttribute('aria-pressed', isDark ? 'true' : 'false');
         }
-        if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', detectVideoAspectRatio); } else detectVideoAspectRatio();
+        if(localStorage.getItem('luna-theme') === 'dark'){ document.body.classList.add('dark-theme'); document.querySelector('.theme-toggle').setAttribute('aria-pressed', 'true'); }
 
+        // Reveal on scroll
         const observer = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
         document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+
+        // Modal video logic (improved: poster, muted autoplay fallback, focus management)
+        const modal = document.getElementById('videoModal');
+        const modalVideo = document.getElementById('modalVideo');
+        const modalSource = document.getElementById('modalSource');
+        let lastFocusedTrigger = null;
+
+        document.querySelectorAll('.video-thumb-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                lastFocusedTrigger = btn;
+                const src = btn.getAttribute('data-video');
+                const thumb = btn.querySelector('img');
+                const poster = thumb ? thumb.src : '';
+                // set source + poster then open modal
+                modalSource.src = src;
+                modalVideo.poster = poster;
+                modal.classList.add('active');
+                modal.setAttribute('aria-hidden','false');
+                document.body.style.overflow = 'hidden';
+
+                // Focus management
+                const closeBtn = modal.querySelector('.video-modal-close');
+                if (closeBtn) { closeBtn.focus(); }
+
+                // Try autoplay muted for reliability; if blocked, leave paused
+                try {
+                    modalVideo.muted = true;
+                    await modalVideo.load();
+                    await modalVideo.play();
+                } catch (err) {
+                    // autoplay blocked — don't crash; user can press play
+                    modalVideo.muted = false;
+                }
+            });
+        });
+
+        function closeVideoModal(){
+            if (!modal.classList.contains('active')) return;
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden','true');
+            try { modalVideo.pause(); } catch(e){}
+            modalVideo.currentTime = 0;
+            // clear source to free network/bandwidth
+            modalSource.src = '';
+            modalVideo.load();
+            document.body.style.overflow = '';
+            // restore focus
+            if (lastFocusedTrigger && typeof lastFocusedTrigger.focus === 'function') lastFocusedTrigger.focus();
+            lastFocusedTrigger = null;
+        }
+
+        // close when clicking backdrop or close button
+        modal.addEventListener('click', (e) => {
+            if (e.target.hasAttribute('data-close-modal') || e.target === modal){
+                closeVideoModal();
+            }
+        });
+
+        // Escape key to close
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')){
+                closeVideoModal();
+            }
+        });
+
+        // Prevent accidental video playback when navigating away
+        window.addEventListener('pagehide', () => {
+            try { modalVideo.pause(); } catch(e){}
+        });
     </script>
 </body>
 </html>
